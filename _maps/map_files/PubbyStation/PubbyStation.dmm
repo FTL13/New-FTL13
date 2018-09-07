@@ -30996,9 +30996,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurple"
-	},
+/turf/open/floor/plasteel/dark,
 /area/science/explab)
 "buz" = (
 /obj/effect/spawner/structure/window/reinforced,
@@ -31563,9 +31561,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurplecorners"
-	},
+/turf/open/floor/plasteel/dark,
 /area/science/explab)
 "bvP" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
@@ -31633,9 +31629,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurple"
-	},
+/turf/open/floor/plasteel/dark,
 /area/science/explab)
 "bvU" = (
 /obj/machinery/recharger,
@@ -32377,9 +32371,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurple"
-	},
+/turf/open/floor/plasteel/dark,
 /area/science/explab)
 "bxD" = (
 /obj/structure/reagent_dispensers/watertank,
@@ -33085,9 +33077,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 8
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurplecorners"
-	},
+/turf/open/floor/plasteel/dark,
 /area/science/explab)
 "byZ" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
@@ -33123,9 +33113,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 8
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurple"
-	},
+/turf/open/floor/plasteel/dark,
 /area/science/explab)
 "bzc" = (
 /obj/structure/reagent_dispensers/fueltank,
@@ -33862,9 +33850,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurple"
-	},
+/turf/open/floor/plasteel/dark,
 /area/science/explab)
 "bAF" = (
 /turf/closed/wall,
@@ -34264,9 +34250,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurple"
-	},
+/turf/open/floor/plasteel/dark,
 /area/crew_quarters/heads/hor)
 "bBw" = (
 /obj/machinery/computer/security,
@@ -34406,9 +34390,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurple"
-	},
+/turf/open/floor/plasteel/dark,
 /area/science/explab)
 "bBK" = (
 /obj/structure/closet/bombcloset,
@@ -35015,9 +34997,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurple"
-	},
+/turf/open/floor/plasteel/dark,
 /area/crew_quarters/heads/hor)
 "bCJ" = (
 /obj/effect/spawner/structure/window/reinforced,
@@ -35454,9 +35434,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurple"
-	},
+/turf/open/floor/plasteel/dark,
 /area/crew_quarters/heads/hor)
 "bDG" = (
 /obj/structure/table,
@@ -35608,9 +35586,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurple"
-	},
+/turf/open/floor/plasteel/dark,
 /area/science/explab)
 "bDU" = (
 /obj/machinery/door/firedoor/heavy,
@@ -36258,9 +36234,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 8
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurple"
-	},
+/turf/open/floor/plasteel/dark,
 /area/crew_quarters/heads/hor)
 "bEW" = (
 /obj/structure/reagent_dispensers/peppertank{
@@ -36356,9 +36330,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurple"
-	},
+/turf/open/floor/plasteel/dark,
 /area/science/explab)
 "bFh" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on{
@@ -36852,9 +36824,7 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 4
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkpurple"
-	},
+/turf/open/floor/plasteel/dark,
 /area/science/explab)
 "bGm" = (
 /obj/machinery/light_switch{
@@ -44044,9 +44014,7 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkyellow"
-	},
+/turf/open/floor/plasteel/dark,
 /area/engine/engine_smes)
 "bVM" = (
 /obj/machinery/power/terminal{
@@ -44391,9 +44359,7 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkyellow"
-	},
+/turf/open/floor/plasteel/dark,
 /area/engine/engine_smes)
 "bWw" = (
 /obj/structure/cable/yellow{
@@ -44741,9 +44707,7 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkyellow"
-	},
+/turf/open/floor/plasteel/dark,
 /area/engine/engine_smes)
 "bXm" = (
 /obj/structure/cable{
@@ -45628,9 +45592,7 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkyellow"
-	},
+/turf/open/floor/plasteel/dark,
 /area/maintenance/disposal/incinerator)
 "bZg" = (
 /obj/structure/cable{
@@ -45875,9 +45837,7 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkyellow"
-	},
+/turf/open/floor/plasteel/dark,
 /area/maintenance/disposal/incinerator)
 "bZP" = (
 /obj/structure/cable/yellow{
@@ -46162,9 +46122,7 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkyellow"
-	},
+/turf/open/floor/plasteel/dark,
 /area/maintenance/disposal/incinerator)
 "caJ" = (
 /obj/structure/cable/yellow{
@@ -46466,9 +46424,7 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkyellow"
-	},
+/turf/open/floor/plasteel/dark,
 /area/maintenance/disposal/incinerator)
 "cbB" = (
 /obj/machinery/atmospherics/pipe/simple/general/visible,
@@ -46727,9 +46683,7 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkyellow"
-	},
+/turf/open/floor/plasteel/dark,
 /area/maintenance/disposal/incinerator)
 "ccq" = (
 /obj/structure/chair/office/dark,
@@ -46896,9 +46850,7 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkyellow"
-	},
+/turf/open/floor/plasteel/dark,
 /area/maintenance/disposal/incinerator)
 "cdh" = (
 /obj/structure/table/glass,
@@ -46922,9 +46874,7 @@
 /obj/effect/turf_decal/tile/yellow{
 	dir = 8
 	},
-/turf/open/floor/plasteel/dark{
-	icon_state = "darkyellow"
-	},
+/turf/open/floor/plasteel/dark,
 /area/maintenance/disposal/incinerator)
 "cdj" = (
 /obj/effect/mapping_helpers/airlock/cyclelink_helper{
