@@ -238,6 +238,8 @@
 /obj/effect/turf_decal/tile/purple{
 	dir = 8
 	},
+/obj/item/surgicaldrill,
+/obj/item/cautery,
 /turf/open/floor/plasteel/dark,
 /area/shuttle/escape)
 "aC" = (
