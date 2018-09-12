@@ -1,0 +1,36 @@
+"a" = (/turf/template_noop,/area/space)
+"b" = (/turf/closed/indestructible,/area/space)
+"c" = (/turf/open/indestructible,/area/space)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaabbbbbbbbbbbaaaaaaaaa
+aaaaaaaaaabcccccccccbaaaaaaaaa
+aaaaaaaaaabcccccccccbbbbbbaaaa
+aaaaaaaaaabcccccccccbccccbaaaa
+aaaabbbbbbbbbbbcbbbbbccccbaaaa
+aaabbbccccbcccccccccbccccbaaaa
+aaabccccccbccccccccccccccbaaaa
+aaabccccccccccccccccbccccbaaaa
+aaabccccccbccccccccccccccbaaaa
+aaabbbccccbcccccccccbccccbaaaa
+aaaabbbbbbbbbbbcbbbbbccccbaaaa
+aaaaaaaaaabcccccccccbccccbaaaa
+aaaaaaaaaabcccccccccbbbbbbaaaa
+aaaaaaaaaabcccccccccbaaaaaaaaa
+aaaaaaaaaabbbbbbbbbbbaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
