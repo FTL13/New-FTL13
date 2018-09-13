@@ -1,2 +1,2 @@
 /datum/map_template/ftl/combat
-	var/name = "Base FTL Combat Template"
+	name = "Base FTL Combat Template"
