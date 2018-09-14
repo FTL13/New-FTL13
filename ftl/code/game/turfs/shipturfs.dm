@@ -6,6 +6,6 @@
 
 /turf/closed/indestructible/ftlwall
 	icon = 'ftl/icons/turf/shipfloors.dmi'
-	icon_state = "test"
+	icon_state = "test2"
 	smooth = SMOOTH_TRUE
 	canSmoothWith = list(/turf/closed/indestructible/ftlwall)
