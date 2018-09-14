@@ -19,6 +19,7 @@
 /datum/starship/New(turf/T, var/ship_spawn_slot)
 	. = ..()
 	unique_id = "[name] [++ship_count]"
+	SSships.currentships[unique_id] = src
 
 	var/map = "[prefix][combat_map]"
 	template = new(map)
@@ -60,13 +61,18 @@
 /datum/starship/Destroy()
 	. = ..()
 	SSships.ShipSpawnLocations[ship_spawn_slot] = TRUE //This slot is free for a new ship now.
-
+	SSships.currentships -= unique_id
 	for(var/i in template.get_affected_turfs(ship_spawn_slot.loc)) //this is so shit TODO: kill this unless this is our best way of cleaning up.
 		var/turf/T = i
 		for(var/x in T.contents)
 			qdel(x)
 		qdel(T)
 		CHECK_TICK
+
+
+/datum/starship/testship
+	var/hull_integrity = 5000
+	var/shield_integrity = 5000
 
 
 

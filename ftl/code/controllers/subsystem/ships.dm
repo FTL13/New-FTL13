@@ -27,8 +27,6 @@ SUBSYSTEM_DEF(ships)
 		message_admins("No more spawn slots for ships, ship not spawned!")
 		log_game("No more spawn slots for ships, ship not spawned!")
 	var/datum/starship/S = new shiptype(ship_spawn.loc, ship_spawn)
-	currentships[unique_id] += S
-
 
 /datum/controller/subsystem/ships/proc/GetFreeSpawnSlot()
 	for(var/i in SSships.ShipSpawnLocations)

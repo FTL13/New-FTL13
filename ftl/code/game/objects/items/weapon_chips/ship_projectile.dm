@@ -31,6 +31,10 @@ obj/item/projectile/ship_projectile //Is purely visual, unless you stand infront
 	return
 
 /obj/effect/overlay/temp/ship_projectile/New(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info, var/duration = 20)
+	var/datum/starship/S = T.GetOurShip()
+	if(S.shield_integrity) //shot blocked by shields
+		S.ShieldHit(attack_info)
+		return
 	var/angle = 0
 	var/rand_coord = rand(-1000,1000)
 	var/list/rand_edge = list(1,-1)

@@ -19,7 +19,7 @@
 	WeaponVisuals(T) //This is what the players see coming out of the weapon
 	addtimer(CALLBACK(src, .proc/ShootShip, T), shot_travel_time) //After shot_travel_time, actually send the shot to the enemy ship.
 
-/obj/item/weapon_chip/proc/WeaponVisualsvar/turf/open/indestructible/ftlfloor/T)
+/obj/item/weapon_chip/proc/WeaponVisuals(var/turf/open/indestructible/ftlfloor/T)
 	if(prob(35)) //Random chance to spark
 		var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 		s.set_up(5, 1, weapon)
