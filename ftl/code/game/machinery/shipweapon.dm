@@ -1,0 +1,87 @@
+/obj/machinery/power/shipweapon //PHYSICAL WEAPON
+	name = "phase cannon"
+	desc = "yell at someone to fix this."
+	icon = 'icons/obj/96x96.dmi'
+	icon_state = "phase_cannon"
+	dir = EAST
+	pixel_x = -32
+	pixel_y = -23
+	anchored = TRUE
+	density = TRUE
+
+	var/charge_rate = 400 //5 second fire rate with phase cannons
+	var/current_charge = 0
+
+	use_power = ACTIVE_POWER_USE
+	idle_power_usage = 1000
+	active_power_usage = 20000
+
+	var/obj/item/weapon_chip/chip = new /obj/item/weapon_chip
+
+/obj/machinery/power/shipweapon/Initialize()
+	. = ..()
+	connect_to_network()
+	if(chip)
+		name = chip.weapon_name
+		desc = chip.weapon_desc
+
+/obj/machinery/power/shipweapon/Destroy(force)
+	if(force) //Is an admin actually trying to delete it?
+		..()
+		. = QDEL_HINT_HARDDEL_NOW
+	return QDEL_HINT_LETMELIVE
+
+/obj/machinery/power/shipweapon/process()
+	if(stat & (BROKEN|MAINT))
+		return
+	if(!chip)
+		current_charge = 0
+		return
+	if(!active_power_usage || avail(active_power_usage)) //Is there enough power available
+		var/load = min((chip.charge_to_fire - current_charge), charge_rate)		// charge at set rate, limited to spare capacity
+		add_load(load) // add the load to the terminal side network
+		current_charge = min(current_charge + load, chip.charge_to_fire)
+
+	if(can_fire()) //Load goes down if we can fire
+		use_power = IDLE_POWER_USE
+		update_icon()
+	else
+		use_power = ACTIVE_POWER_USE
+
+/obj/machinery/power/shipweapon/proc/can_fire()
+	return chip && current_charge >= chip.charge_to_fire
+
+/obj/machinery/power/shipweapon/proc/attempt_fire(var/turf/open/indestructible/ftlfloor/T)
+	if(!can_fire())
+		return FALSE
+	current_charge = 0
+	chip.fire(T)
+	update_icon()
+
+	return TRUE
+
+/obj/machinery/power/shipweapon/attackby(obj/item/W, mob/user, params) //someone add this thanks -no
+	if(istype(W, /obj/item/weapon_chip) && !chip)
+		if(!user.drop_item()) return
+		name = chip.weapon_name
+		desc = chip.weapon_desc
+		chip = W
+		current_charge = 0
+		W.loc = src
+		W.add_fingerprint(user)
+		to_chat(user, "<span class='notice'>You install \the [W] into \the [src].</span>")
+
+	else if(istype(W, /obj/item/weapon/crowbar)) //tear it out
+		chip.loc = src.loc
+		name = initial(weapon_name)
+		desc = initial(desc)
+		to_chat(user, "<span class='notice'>You remove \the [chip] out of \the [src].</span>")
+		playsound(src.loc, 'sound/items/deconstruct.ogg', 50, 1)
+		chip = null	
+
+/obj/machinery/power/shipweapon/update_icon()
+	switch(state)
+		if(can_fire())
+			icon_state = "[chip.icon_name]_fire"
+		else
+			icon_state = "[chip.icon_name]"

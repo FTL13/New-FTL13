@@ -1,10 +1,11 @@
-/turf/open/indestructable/ftlfloor
+/turf/open/indestructible/ftlfloor
+	icon = 'ftl/icons/turf/shipfloors.dmi'
+	icon_state = "test4"
 	var/effects = NONE //Bitflag of current modifiers to this turfs
 	var/unique_id //links back to our ship
-	light_power = 0.5
 
-
-/turf/closed/indestructable/ftlwall
-	icon = 'icons/turf/walls/riveted.dmi'
-	icon_state = "riveted"
+/turf/closed/indestructible/ftlwall
+	icon = 'ftl/icons/turf/shipfloors.dmi'
+	icon_state = "test"
 	smooth = SMOOTH_TRUE
+	canSmoothWith = list(/turf/closed/indestructible/ftlwall)

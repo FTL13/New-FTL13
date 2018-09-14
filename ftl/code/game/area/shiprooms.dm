@@ -2,6 +2,10 @@
 	name = "shiproom"
 	icon_state = "shiproom"
 
+/area/ftl/shipwall
+	name = "ship wall"
+	icon_state = "shipwall"
+
 /area/ftl/shiproom/bridge
 	name = "bridge"
 	icon_state = "shiproom"

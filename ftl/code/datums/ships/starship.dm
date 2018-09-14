@@ -22,15 +22,15 @@
 
 	var/map = "[prefix][combat_map]"
 	template = new(map)
-	template.load(T)
+	template.load(T, TRUE)
 
 	src.ship_spawn_slot = ship_spawn_slot
 	SSships.ShipSpawnLocations[ship_spawn_slot] = FALSE //This slot is taken now, cya chump.
 
 	var/shipareas
-	for(var/turf/open/indestructable/ftlfloor/floor in template.get_affected_turfs(src.ship_spawn_slot.loc))
+	for(var/turf/open/indestructible/ftlfloor/floor in template.get_affected_turfs(src.ship_spawn_slot.loc))
 		floor.unique_id = unique_id
-		
+
 		var/area/ftl/shiproom/A = get_area(floor)
 		if(!shiprooms.Find(A))
 			continue
@@ -46,7 +46,7 @@
 		if(SHIELDS)
 			var/datum/shiproom/shields/x = new(src)
 			shiprooms[Atype] = x
-		if(WEAPONS)	
+		if(WEAPONS)
 			var/datum/shiproom/weapons/x = new(src)
 			shiprooms[Atype] = x
 		if(ENGINE)
@@ -70,4 +70,3 @@
 
 
 
-	
