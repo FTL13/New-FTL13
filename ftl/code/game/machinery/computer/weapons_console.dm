@@ -29,6 +29,9 @@
 	var/datum/action/innate/fire_weapon/fire_weapon_action
 	var/datum/action/innate/jump_to_ship/jump_to_ship_action
 
+	var/obj/machinery/power/shipweapon/ourweapon //The weapon we are linked to
+
+
 /obj/machinery/computer/camera_advanced/weapons/Initialize()
 	. = ..()
 	fire_weapon_action = new
@@ -57,6 +60,13 @@
 		jump_to_ship_action.Grant(user)
 		actions += jump_to_ship_action
 
+/obj/machinery/computer/camera_advanced/weapons/attackby(obj/item/W, mob/user, params) //we need better steps again later\
+	. = ..()
+	if(istype(W, /obj/item/weaponlinker))
+		var/obj/item/weaponlinker/linker = W
+		ourweapon = linker.weapon
+		to_chat(user, "<span class='notice'>You set \the [linker.weapon] to be linked to \the [src].</span>")
+
 /datum/action/innate/fire_weapon
 	name = "Fire Weapon"
 	icon_icon = 'icons/mob/actions/actions_silicon.dmi'
@@ -68,8 +78,11 @@
 	var/mob/living/C = owner
 	var/mob/camera/aiEye/remote/weapons/remote_eye = C.remote_control
 	var/obj/machinery/computer/camera_advanced/weapons/console = target
-
-	explosion(remote_eye.loc, 0,0,1,1)
+	
+	if(!ourweapon && !get_area(remote_eye.loc).weaponconsole_compatible)
+		return
+	ourweapon.attempt_fire(remote_eye, remote_eye.loc)
+	
 
 /datum/action/innate/jump_to_ship
 	name = "Jump to enemy ship"
@@ -81,5 +94,9 @@
 		return
 	var/mob/living/C = owner
 	var/mob/camera/aiEye/remote/weapons/remote_eye = C.remote_control
-
 	remote_eye.JumpToShip()
+
+
+
+
+

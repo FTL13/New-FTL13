@@ -58,8 +58,8 @@
 			shiprooms[Atype] = x
 
 
-/datum/starship/ShieldHit(var/datum/player_attack/attack_info)
-	shield_integrity -= Max(0, shield_integrity - attack_info.shield_damage)
+/datum/starship/proc/ShieldHit(var/datum/player_attack/attack_info)
+	shield_integrity -= max(0, shield_integrity - attack_info.shield_damage)
 
 /datum/starship/Destroy()
 	. = ..()
@@ -74,8 +74,8 @@
 
 
 /datum/starship/testship
-	var/hull_integrity = 5000
-	var/shield_integrity = 5000
+	hull_integrity = 5000
+	shield_integrity = 5000
 
 
 

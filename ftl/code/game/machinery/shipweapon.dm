@@ -50,15 +50,17 @@
 		use_power = ACTIVE_POWER_USE
 
 /obj/machinery/power/shipweapon/proc/can_fire()
-	return chip && current_charge >= chip.attack_info.charge_to_fire
+	return chip && current_charge >= chip.charge_to_fire
 
-/obj/machinery/power/shipweapon/proc/attempt_fire(var/turf/open/indestructible/ftlfloor/T)
+/obj/machinery/power/shipweapon/proc/attempt_fire(mob/user, var/turf/open/indestructible/ftlfloor/T)
 	. = ..()
 	if(!istype(T))
 		return
 	if(!can_fire())
+		to_chat(user, "<span class='notice'>\the [src] is not ready to fire.</span>")
 		return FALSE
 	current_charge = 0
+	to_chat(user, "<span class='notice'>You fire \the [src]!</span>")
 	chip.Fire(T)
 	update_icon()
 
@@ -82,7 +84,13 @@
 		desc = initial(desc)
 		to_chat(user, "<span class='notice'>You remove \the [chip] out of \the [src].</span>")
 		playsound(src.loc, 'sound/items/deconstruct.ogg', 50, 1)
-		chip = null	
+		chip = null
+
+	else if(istype(W, /obj/item/weaponlinker)) //tear it out
+		to_chat(user, "<span class='notice'>You tune \the [linker] to the \the [src].</span>")
+		var/obj/item/weaponlinker/linker = W
+		linker.weapon = src
+		
 
 /obj/machinery/power/shipweapon/update_icon()
 	. = ..()
@@ -90,3 +98,9 @@
 		icon_state = "[chip.icon_name]_fire"
 	else
 		icon_state = "[chip.icon_name]"
+
+/obj/item/weaponlinker
+	name = "weapon linker"
+	desc = "Used to link a weapon to a console. Use this on a weapons console, and then use it on any weapon to link the two together."
+
+	var/obj/machinery/power/shipweapon/weapon
