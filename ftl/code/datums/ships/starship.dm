@@ -58,6 +58,9 @@
 			shiprooms[Atype] = x
 
 
+/datum/starship/ShieldHit(var/datum/player_attack/attack_info)
+	shield_integrity -= Max(0, shield_integrity - attack_info.shield_damage)
+
 /datum/starship/Destroy()
 	. = ..()
 	SSships.ShipSpawnLocations[ship_spawn_slot] = TRUE //This slot is free for a new ship now.

@@ -23,7 +23,12 @@
 	playsound(loc, attack_info.fire_sound, 50, 1)
 
 /obj/item/weapon_chip/projectile/ShootShip(var/turf/open/indestructible/ftlfloor/T)
-	var/obj/item/projectile/ship_projectile/A = new(src.loc, attack_info)
+	var/datum/starship/S = T.GetOurShip()
+	if(S.shield_integrity) //shot blocked by shields TODO: Make this visibly hit the shields and add actual visual shields.
+		S.ShieldHit(attack_info)
+		return
+	var/obj/item/projectile/ship_projectile/A = new(T, attack_info)
+	A.icon_state =  projectile_icon
 	return
 
 /obj/item/weapon_chip/projectile/phase
