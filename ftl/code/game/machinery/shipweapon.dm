@@ -1,7 +1,7 @@
 /obj/machinery/power/shipweapon //PHYSICAL WEAPON
 	name = "phase cannon"
 	desc = "yell at someone to fix this."
-	icon = 'icons/obj/96x96.dmi'
+	icon = 'ftl/icons/obj/96x96.dmi'
 	icon_state = "phase_cannon"
 	dir = EAST
 	pixel_x = -32
@@ -32,6 +32,7 @@
 	return QDEL_HINT_LETMELIVE
 
 /obj/machinery/power/shipweapon/process()
+	. = ..()
 	if(stat & (BROKEN|MAINT))
 		return
 	if(!chip)
@@ -49,20 +50,24 @@
 		use_power = ACTIVE_POWER_USE
 
 /obj/machinery/power/shipweapon/proc/can_fire()
-	return chip && current_charge >= chip.charge_to_fire
+	return chip && current_charge >= chip.attack_info.charge_to_fire
 
 /obj/machinery/power/shipweapon/proc/attempt_fire(var/turf/open/indestructible/ftlfloor/T)
+	. = ..()
+	if(!istype(T))
+		return
 	if(!can_fire())
 		return FALSE
 	current_charge = 0
-	chip.fire(T)
+	chip.Fire(T)
 	update_icon()
 
 	return TRUE
 
-/obj/machinery/power/shipweapon/attackby(obj/item/W, mob/user, params) //someone add this thanks -no
+/obj/machinery/power/shipweapon/attackby(obj/item/W, mob/user, params) //we need better steps again later
+	. = ..()
 	if(istype(W, /obj/item/weapon_chip) && !chip)
-		if(!user.drop_item()) return
+		if(!user.transferItemToLoc(W, src)) return
 		name = chip.weapon_name
 		desc = chip.weapon_desc
 		chip = W
@@ -71,17 +76,17 @@
 		W.add_fingerprint(user)
 		to_chat(user, "<span class='notice'>You install \the [W] into \the [src].</span>")
 
-	else if(istype(W, /obj/item/weapon/crowbar)) //tear it out
+	else if(istype(W, /obj/item/crowbar)) //tear it out
 		chip.loc = src.loc
-		name = initial(weapon_name)
+		name = initial(name)
 		desc = initial(desc)
 		to_chat(user, "<span class='notice'>You remove \the [chip] out of \the [src].</span>")
 		playsound(src.loc, 'sound/items/deconstruct.ogg', 50, 1)
 		chip = null	
 
 /obj/machinery/power/shipweapon/update_icon()
-	switch(state)
-		if(can_fire())
-			icon_state = "[chip.icon_name]_fire"
-		else
-			icon_state = "[chip.icon_name]"
+	. = ..()
+	if(can_fire())
+		icon_state = "[chip.icon_name]_fire"
+	else
+		icon_state = "[chip.icon_name]"

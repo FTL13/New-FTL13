@@ -1,17 +1,31 @@
 /obj/item/weapon_chip/projectile
 	var/fire_delay = 5 //Time between shots
 	var/shots_fired = 1
+	var/projectile_icon = "laser"
 
-/obj/item/weapon_chip/projectile/Fire(var/turf/T)
+/obj/item/weapon_chip/projectile/WeaponVisuals(var/turf/open/indestructible/ftlfloor/T)
+	.=..()
+	for(var/i in 1 to chip.attack_data.shots_fired) //Fire for the amount of time
+		addtimer(CALLBACK(src, .proc/spawn_projectile), fire_delay*i)
 
-/obj/item/weapon_chip/ion
-	name = "ion cannon chip"
-	weapon_name = "Ion Cannon"
-	icon_name ="ion_cannon"
 
-	//projectile_type = /obj/item/projectile/ship_projectile/phase_blast/ion
-	fire_sound = 'sound/weapons/emitter2.ogg'
+/obj/item/weapon_chip/projectile/SpawnProjectile()
+	var/obj/item/projectile/ship_projectile/A = new(src.loc)
+	A.icon_state =  projectile_icon
+	A.setDir(EAST)
+	A.pixel_x = 32
+	A.pixel_y = 12
+	A.yo = 0
+	A.xo = 20
+	A.starting = loc
+	A.fire()
 
-	attack_data = new /datum/ship_attack/ion
+	playsound(loc, attack_info.fire_sound, 50, 1)
 
-	charge_to_fire = 10000
+/obj/item/weapon_chip/projectile/ShootShip(var/turf/open/indestructible/ftlfloor/T)
+	var/obj/item/projectile/ship_projectile/A = new(src.loc, attack_info)
+	return
+
+/obj/item/weapon_chip/projectile/phase
+	fire_delay = 5 //Time between shots
+	shots_fired = 3

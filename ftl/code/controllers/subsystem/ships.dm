@@ -19,7 +19,7 @@ SUBSYSTEM_DEF(ships)
 		
 	for(var/datum/parsed_map/PM in combatmaps)
 		PM.initTemplateBounds()
-	CreateShip(/datum/starship)
+	CreateShip(/datum/starship) //debug
 
 /datum/controller/subsystem/ships/proc/CreateShip(var/datum/shiptype)
 	var/obj/effect/landmark/ship_spawn/ship_spawn = GetFreeSpawnSlot()
@@ -27,7 +27,7 @@ SUBSYSTEM_DEF(ships)
 		message_admins("No more spawn slots for ships, ship not spawned!")
 		log_game("No more spawn slots for ships, ship not spawned!")
 	var/datum/starship/S = new shiptype(ship_spawn.loc, ship_spawn)
-	currentships += S
+	currentships[unique_id] += S
 
 
 /datum/controller/subsystem/ships/proc/GetFreeSpawnSlot()
