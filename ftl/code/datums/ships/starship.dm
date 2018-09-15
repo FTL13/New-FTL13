@@ -9,6 +9,8 @@
 	var/shield_integrity
 	var/traits
 	var/status
+	var/dodge_chance = 30 //Base chance to dodge a shot
+	var/dodge_modifier = 1 //Higher is better
 
 	var/list/shiprooms = list()
 
@@ -72,10 +74,13 @@
 		qdel(T)
 		CHECK_TICK
 
-/datum/starship/adjust_hull(value) //use this to change hull level or i kill you
+/datum/starship/proc/adjust_hull(value) //use this to change hull level or i kill you
 	hull_integrity = max(hull_integrity + value, initial(hull_integrity))
 	if(hull_integrity <= 0)
 		qdel(src) //we dead
+
+/datum/starship/proc/get_dodge_chance()
+	return dodge_chance * dodge_modifier
 
 /datum/starship/testship
 	hull_integrity = 5000

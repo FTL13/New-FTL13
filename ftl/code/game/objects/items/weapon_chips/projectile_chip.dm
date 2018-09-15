@@ -25,12 +25,15 @@
 /obj/item/weapon_chip/projectile/ShootShip(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info) //Real attack
 	var/datum/starship/S = T.GetOurShip()
 	var/matrix/M = RandomAimMatrix() //From what direction will we hit the shield?
-	if(S.shield_integrity) //shot blocked by shields TODO: Make this visibly hit the shields and add actual visual shields.
-		S.ShieldHit(attack_info)
-		message_admins("shield")
-		return
 	message_admins("fire real projectile")
 	for(var/i in 1 to shots_fired)
+		if(prob(S.get_dodge_chance()))
+			message_admins("shot missed")
+			return
+		if(S.shield_integrity) //shot blocked by shields TODO: Make this visibly hit the shields and add actual visual shields.
+			S.ShieldHit(attack_info)
+			message_admins("shield")
+			return
 		addtimer(CALLBACK(src, .proc/SpawnShipProjectile, T, attack_info, M), fire_delay*i)
 
 /obj/item/weapon_chip/projectile/proc/SpawnShipProjectile(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info) //projectile that actually hits the ship

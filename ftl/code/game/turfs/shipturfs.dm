@@ -11,10 +11,9 @@
 	return SSships.currentships[unique_id].shiprooms[get_area(src)]
 
 /turf/open/indestructible/ftlfloor/proc/HitByShipProjectile(var/datum/player_attack/attack_info)
-	var/datum/starship/s = GetOurShip()
-	s.adjust_hull(-attack_info.hull_damage)
+	var/datum/starship/S = GetOurShip()
+	S.adjust_hull(-attack_info.hull_damage)
 	message_admins("[GetOurShipRoom()]")
-	return
 
 /turf/closed/indestructible/ftlwall
 	icon = 'ftl/icons/turf/shipfloors.dmi'
