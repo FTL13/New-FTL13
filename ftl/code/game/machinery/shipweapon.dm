@@ -10,13 +10,13 @@
 	density = TRUE
 
 	var/charge_rate = 400 //5 second fire rate with phase cannons
-	var/current_charge = 0
+	var/current_charge = 5000
 
 	use_power = ACTIVE_POWER_USE
 	idle_power_usage = 1000
 	active_power_usage = 20000
 
-	var/obj/item/weapon_chip/chip = new /obj/item/weapon_chip
+	var/obj/item/weapon_chip/chip = new /obj/item/weapon_chip/projectile/phase
 
 /obj/machinery/power/shipweapon/Initialize()
 	. = ..()
@@ -24,6 +24,7 @@
 	if(chip)
 		name = chip.weapon_name
 		desc = chip.weapon_desc
+		chip.weapon = src
 
 /obj/machinery/power/shipweapon/Destroy(force)
 	if(force) //Is an admin actually trying to delete it?
@@ -50,16 +51,18 @@
 		use_power = ACTIVE_POWER_USE
 
 /obj/machinery/power/shipweapon/proc/can_fire()
-	return chip && current_charge >= chip.charge_to_fire
+	if(chip && (current_charge >= chip.charge_to_fire))
+		return TRUE
+	else
+		return FALSE
 
 /obj/machinery/power/shipweapon/proc/attempt_fire(mob/user, var/turf/open/indestructible/ftlfloor/T)
-	. = ..()
 	if(!istype(T))
 		return
 	if(!can_fire())
 		to_chat(user, "<span class='notice'>\the [src] is not ready to fire.</span>")
 		return FALSE
-	current_charge = 0
+	//current_charge = 0
 	to_chat(user, "<span class='notice'>You fire \the [src]!</span>")
 	chip.Fire(T)
 	update_icon()
@@ -74,21 +77,23 @@
 		desc = chip.weapon_desc
 		chip = W
 		current_charge = 0
+		chip.weapon = src
 		W.loc = src
 		W.add_fingerprint(user)
 		to_chat(user, "<span class='notice'>You install \the [W] into \the [src].</span>")
 
-	else if(istype(W, /obj/item/crowbar)) //tear it out
+	else if(istype(W, /obj/item/crowbar) && chip) //tear it out
 		chip.loc = src.loc
 		name = initial(name)
 		desc = initial(desc)
+		chip.weapon = null
 		to_chat(user, "<span class='notice'>You remove \the [chip] out of \the [src].</span>")
 		playsound(src.loc, 'sound/items/deconstruct.ogg', 50, 1)
 		chip = null
 
 	else if(istype(W, /obj/item/weaponlinker)) //tear it out
-		to_chat(user, "<span class='notice'>You tune \the [linker] to the \the [src].</span>")
 		var/obj/item/weaponlinker/linker = W
+		to_chat(user, "<span class='notice'>You tune \the [linker] to the \the [src].</span>")
 		linker.weapon = src
 		
 
@@ -102,5 +107,7 @@
 /obj/item/weaponlinker
 	name = "weapon linker"
 	desc = "Used to link a weapon to a console. Use this on a weapons console, and then use it on any weapon to link the two together."
+	icon = 'icons/obj/tools.dmi'
+	icon_state = "welder"
 
 	var/obj/machinery/power/shipweapon/weapon

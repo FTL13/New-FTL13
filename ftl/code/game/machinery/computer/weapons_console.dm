@@ -5,6 +5,10 @@
 	icon_state = "camera_target"
 	use_static = USE_STATIC_NONE
 
+/mob/camera/aiEye/remote/weapons/Initialize()
+	.=..()
+	JumpToShip()
+
 /mob/camera/aiEye/remote/weapons/setLoc(var/t)
 	var/area/new_area = get_area(t)
 	if(new_area && new_area.weaponconsole_compatible)
@@ -16,8 +20,6 @@
 	var/obj/effect/landmark/ship_spawn/ship_spawn = SSships.GetUsedSpawnSlot()
 	if(!ship_spawn)
 		return
-		message_admins("re")
-	message_admins("tard")
 	setLoc(ship_spawn.loc) 
 
 
@@ -37,8 +39,6 @@
 	fire_weapon_action = new
 	jump_to_ship_action = new
 	z_lock |= SSmapping.levels_by_trait(ZTRAIT_SPACECOMBAT)
-	var/mob/camera/aiEye/remote/weapons/w = eyeobj
-	w.JumpToShip()
 
 /obj/machinery/computer/camera_advanced/weapons/CreateEye()
 	eyeobj = new /mob/camera/aiEye/remote/weapons(get_turf(src))
@@ -64,6 +64,9 @@
 	. = ..()
 	if(istype(W, /obj/item/weaponlinker))
 		var/obj/item/weaponlinker/linker = W
+		if(!linker.weapon)
+			to_chat(user, "<span class='notice'>No weapon is tuned to be linker.</span>")
+			return
 		ourweapon = linker.weapon
 		to_chat(user, "<span class='notice'>You set \the [linker.weapon] to be linked to \the [src].</span>")
 
@@ -79,10 +82,11 @@
 	var/mob/camera/aiEye/remote/weapons/remote_eye = C.remote_control
 	var/obj/machinery/computer/camera_advanced/weapons/console = target
 	
-	if(!ourweapon && !get_area(remote_eye.loc).weaponconsole_compatible)
+	if(!console.ourweapon)
 		return
-	ourweapon.attempt_fire(remote_eye, remote_eye.loc)
-	
+	if(!get_area(remote_eye.loc).weaponconsole_compatible)
+		return
+	console.ourweapon.attempt_fire(console.current_user, remote_eye.loc)
 
 /datum/action/innate/jump_to_ship
 	name = "Jump to enemy ship"

@@ -10,7 +10,7 @@
 	var/traits
 	var/status
 
-	var/list/shiprooms
+	var/list/shiprooms = list()
 
 	var/datum/map_template/ftl/combat/template
 	var/prefix = "ftl/_maps/ships/"
@@ -75,7 +75,7 @@
 
 /datum/starship/testship
 	hull_integrity = 5000
-	shield_integrity = 5000
+	shield_integrity = 0
 
 
 

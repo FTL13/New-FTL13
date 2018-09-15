@@ -15,7 +15,7 @@
 	var/shot_travel_time = 20 //Time it takes between firing, and shot reaching enemy ship.
 	var/charge_to_fire = 2000
 
-/obj/item/weapon_chip/proc/Fire(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info)
+/obj/item/weapon_chip/proc/Fire(var/turf/open/indestructible/ftlfloor/T)
 	WeaponVisuals(T, attack_info) //This is what the players see coming out of the weapon
 	addtimer(CALLBACK(src, .proc/ShootShip, T, attack_info), shot_travel_time) //After shot_travel_time, actually send the shot to the enemy ship.
 

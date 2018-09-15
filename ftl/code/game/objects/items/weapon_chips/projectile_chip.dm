@@ -6,29 +6,35 @@
 /obj/item/weapon_chip/projectile/WeaponVisuals(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info)
 	.=..()
 	for(var/i in 1 to shots_fired) //Fire for the amount of time
-		addtimer(CALLBACK(src, .proc/SpawnProjectile), fire_delay*i)
+		addtimer(CALLBACK(src, .proc/SpawnProjectile, T, attack_info), fire_delay*i)
 
-/obj/item/weapon_chip/projectile/proc/SpawnProjectile()
-	var/obj/item/projectile/ship_projectile/A = new(src.loc)
+/obj/item/weapon_chip/projectile/proc/SpawnProjectile() //Projectile that flies out of the gun and dissapears, exists for visual aesthetic
+	var/obj/item/projectile/ship_projectile/A = new(weapon.loc)
 	A.icon_state =  projectile_icon
 	A.setDir(EAST)
 	A.pixel_x = 32
 	A.pixel_y = 12
 	A.yo = 0
 	A.xo = 20
-	A.starting = loc
+	A.starting = weapon
 	A.fire()
+	message_admins("pew")
 
-	playsound(loc, attack_info.fire_sound, 50, 1)
+	playsound(weapon, attack_info.fire_sound, 50, 1)
 
-/obj/item/weapon_chip/projectile/ShootShip(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info)
+/obj/item/weapon_chip/projectile/ShootShip(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info) //Real attack
 	var/datum/starship/S = T.GetOurShip()
 	if(S.shield_integrity) //shot blocked by shields TODO: Make this visibly hit the shields and add actual visual shields.
 		S.ShieldHit(attack_info)
+		message_admins("shield")
 		return
-	var/obj/effect/temp_visual/shipprojectile/A = new(T, attack_info)
-	A.icon_state =  projectile_icon
-	return
+	message_admins("fire real projectile")
+	for(var/i in 1 to shots_fired)
+		addtimer(CALLBACK(src, .proc/SpawnShipProjectile, T, attack_info), fire_delay*i)
+
+/obj/item/weapon_chip/projectile/proc/SpawnShipProjectile(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info) //projectile that actually hits the ship
+	var/obj/effect/ship_projectile/A = new(T, attack_info)
+	A.icon_state = projectile_icon
 
 /obj/item/weapon_chip/projectile/phase
 	fire_delay = 5 //Time between shots

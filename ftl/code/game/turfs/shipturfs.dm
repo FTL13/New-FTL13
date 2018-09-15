@@ -11,6 +11,8 @@
 	return SSships.currentships[unique_id].shiprooms[get_area(src)]
 
 /turf/open/indestructible/ftlfloor/proc/HitByShipProjectile(var/attack_info)
+	message_admins("[GetOurShipRoom()]")
+	return
 
 /turf/closed/indestructible/ftlwall
 	icon = 'ftl/icons/turf/shipfloors.dmi'

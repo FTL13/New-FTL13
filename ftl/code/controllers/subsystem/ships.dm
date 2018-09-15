@@ -19,7 +19,7 @@ SUBSYSTEM_DEF(ships)
 		
 	for(var/datum/parsed_map/PM in combatmaps)
 		PM.initTemplateBounds()
-	CreateShip(/datum/starship) //debug
+	CreateShip(/datum/starship/testship) //debug
 
 /datum/controller/subsystem/ships/proc/CreateShip(var/datum/shiptype)
 	var/obj/effect/landmark/ship_spawn/ship_spawn = GetFreeSpawnSlot()

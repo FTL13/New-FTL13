@@ -17,19 +17,17 @@ obj/item/projectile/ship_projectile //Is purely visual, unless you stand infront
 
 ////BELOW IS PURELY VISUAL FOR UI PURPOSES
 
-/obj/effect/temp_visual/shipprojectile //even more visual
+/obj/effect/ship_projectile //even more visual
 	name = "Phase Cannon shot"
 	desc = "HOLY FUCK GET TO COVER"
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "emitter"
 	luminosity = 5
 
-	duration = 5
-
-/obj/effect/temp_visual/ship_target/ex_act()
+/obj/effect/ship_target/ex_act()
 	return
 
-/obj/effect/temp_visual/ship_projectile/Initialize(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info, var/duration = 20)
+/obj/effect/ship_projectile/Initialize(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info, var/duration = 20)
 	. = ..()
 	var/angle = 0
 	var/rand_coord = rand(-1000,1000)
@@ -44,11 +42,13 @@ obj/item/projectile/ship_projectile //Is purely visual, unless you stand infront
 	var/matrix/M = new
 	M.Turn(angle + 180)
 	transform = M //rotates projectile in direction
+	message_admins("projectile is flying in now")
 	animate(src, pixel_x = 0, pixel_y = 0, time = duration)
-	addtimer(CALLBACK(src, .proc/hit, T, attack_info), duration)
+	addtimer(CALLBACK(src, .proc/hit, loc, attack_info), duration)
 
 
-/obj/effect/temp_visual/ship_projectile/proc/hit(var/turf/open/indestructible/ftlfloor/T, var/datum/attack_info)
+/obj/effect/ship_projectile/proc/hit(var/turf/open/indestructible/ftlfloor/T, var/datum/attack_info)
 	T.HitByShipProjectile(attack_info)
 	layer = 0.1 //to prevent it from being seen while we wait for it to be deleted
 	qdel(src)
+	message_admins("projectile is kill")
