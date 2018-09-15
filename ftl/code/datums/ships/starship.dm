@@ -72,6 +72,10 @@
 		qdel(T)
 		CHECK_TICK
 
+/datum/starship/adjust_hull(value) //use this to change hull level or i kill you
+	hull_integrity = max(hull_integrity + value, initial(hull_integrity))
+	if(hull_integrity <= 0)
+		qdel(src) //we dead
 
 /datum/starship/testship
 	hull_integrity = 5000

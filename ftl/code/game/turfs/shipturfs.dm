@@ -10,7 +10,9 @@
 /turf/open/indestructible/ftlfloor/proc/GetOurShipRoom()
 	return SSships.currentships[unique_id].shiprooms[get_area(src)]
 
-/turf/open/indestructible/ftlfloor/proc/HitByShipProjectile(var/attack_info)
+/turf/open/indestructible/ftlfloor/proc/HitByShipProjectile(var/datum/player_attack/attack_info)
+	var/datum/starship/s = GetOurShip()
+	s.adjust_hull(-attack_info.hull_damage)
 	message_admins("[GetOurShipRoom()]")
 	return
 
