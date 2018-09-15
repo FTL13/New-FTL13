@@ -65,7 +65,7 @@
 	. = ..()
 	SSships.ShipSpawnLocations[ship_spawn_slot] = TRUE //This slot is free for a new ship now.
 	SSships.currentships -= unique_id
-	for(var/i in template.get_affected_turfs(ship_spawn_slot.loc)) //this is so shit TODO: kill this unless this is our best way of cleaning up.
+	for(var/i in template.get_affected_turfs(ship_spawn_slot.loc, TRUE)) //this is so shit TODO: kill this unless this is our best way of cleaning up.
 		var/turf/T = i
 		for(var/x in T.contents)
 			qdel(x)
