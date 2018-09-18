@@ -2,7 +2,7 @@
   var/name = ""
   var/id
   var/unique = FALSE
-  var/frequency = 1000
+  var/frequency = 10
   var/visited = FALSE
 
   var/sector_type = "bad sector"
@@ -28,7 +28,7 @@
   if(prob(planet_prob))
     var/p = pickweight(SSftl_navigation.planet_types)
     planet = new p
-    
+
   if(prob(station_prob))
     station = new /datum/station
 
@@ -92,7 +92,7 @@ Sol 3 sure why not.
   sector_type = "Syndicate Homeworld"
 
 /datum/sector/named/nt_home
-  name = "Gooftown" //The intention is to let an antag emag the console to force a jump to this system.
+  name = "Gooftown"
   frequency = -1 //Will not randomly spawn, but is unique
   sector_type = "Nanotrasen Homeworld"
 

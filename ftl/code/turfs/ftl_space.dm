@@ -1,7 +1,7 @@
 /turf/open/space/transit/ftl
 	name = "\proper space"
 	icon_state = "black"
-	dir = SOUTH
+	dir = EAST
 	baseturfs = /turf/open/space/transit/ftl
 	flags_1 = NOJAUNT_1 //This line goes out to every wizard that ever managed to escape the den. I'm sorry.
 	explosion_block = INFINITY
@@ -10,13 +10,17 @@
 
 
 
-/turf/open/space/transit/ftl/proc/begin_ftl()
+/turf/open/space/transit/ftl/proc/ftl_turf_update(ftl_start)
 	if(!locate(/obj/structure/lattice) in src)
 		for(var/obj/O in contents)
 			throw_atom(O)
+	if(ftl_start)
+		update_icon() //Update us using icon state defined in the transit level proc
+	else
+		icon_state = SPACE_ICON_STATE //Update us using the normal space define
 
 
-/turf/open/space/transit/ftl/throw_atom(atom/movable/AM)
+/turf/open/space/transit/ftl/throw_atom(atom/movable/AM) //TODO: Talk about how we handle players who fall off the ship
 	set waitfor = FALSE
 	if(!AM || istype(AM, /obj/docking_port))
 		return
