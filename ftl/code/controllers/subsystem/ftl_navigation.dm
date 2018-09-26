@@ -152,6 +152,7 @@ SUBSYSTEM_DEF(ftl_navigation)
 	var/starttime = world.timeofday
 	for(var/z in SSmapping.levels_by_trait(ZTRAIT_STATION))
 		for(var/returned_turf in block(locate(1,1,z), locate(255,255,z)))
+			CHECK_TICK
 			var/turf/T = returned_turf
 			if(istype(T,/turf/open/space/transit/ftl))
 				var/turf/open/space/transit/ftl/F = T
