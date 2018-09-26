@@ -15,4 +15,10 @@
 #include "tgstation.dme"
 
 // BEGIN_INCLUDE
+#include "code\__DEFINES\~ftl_defines\ftl_navigation.dm"
+#include "code\__DEFINES\~ftl_defines\subsystem.dm"
+#include "ftl\code\controllers\subsystem\ftl_navigation.dm"
+#include "ftl\code\datums\sector.dm"
+#include "ftl\code\machinery\computer\navigation_computer.dm"
+#include "ftl\code\turfs\ftl_space.dm"
 // END_INCLUDE

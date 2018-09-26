@@ -6,9 +6,9 @@
   var/visited = FALSE
 
   var/sector_type = "bad sector"
-  //
+
   // var/datum/faction/controlling_faction
-  //
+
   var/datum/planet/planet
   var/datum/station/station
 
@@ -22,6 +22,7 @@
 /datum/sector/New()
   SSftl_navigation.sector_count ++
   id = "[SSftl_navigation.sector_count]"
+  SSftl_navigation.all_sectors[id] += src
   for(var/i in 1 to rand(2,4))
     name += pick(SSftl_navigation.sector_name_fragments)
   name = capitalize(name) + " [id]"
@@ -31,6 +32,14 @@
 
   if(prob(station_prob))
     station = new /datum/station
+
+
+/datum/sector/Destroy()
+  if(planet)
+    qdel(planet)
+  if(station)
+    qdel(station)
+  return ..()
 
 /datum/sector/empty
   sector_type = "empty sector"
@@ -77,7 +86,9 @@ Sol 3 sure why not.
 /datum/sector/named/New()
   SSftl_navigation.sector_count ++
   id = "[SSftl_navigation.sector_count]"
-  name += " [id]"
+  SSftl_navigation.all_sectors[id] += src
+
+  name += " [id]" //temp line please ignore
 
   if(prob(planet_prob))
     var/p = pickweight(SSftl_navigation.planet_types)
@@ -96,7 +107,7 @@ Sol 3 sure why not.
   frequency = -1 //Will not randomly spawn, but is unique
   sector_type = "Nanotrasen Homeworld"
 
-/datum/sector/named/sol
+/datum/sector/named/sol3
   name = "Sol 3"
   frequency = 1
   sector_type = "Sol Gov Homeworld"

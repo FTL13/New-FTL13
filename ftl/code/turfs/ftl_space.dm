@@ -3,11 +3,6 @@
 	icon_state = "black"
 	dir = EAST
 	baseturfs = /turf/open/space/transit/ftl
-	flags_1 = NOJAUNT_1 //This line goes out to every wizard that ever managed to escape the den. I'm sorry.
-	explosion_block = INFINITY
-//fix paralax off
-
-
 
 
 /turf/open/space/transit/ftl/proc/ftl_turf_update(ftl_start)
@@ -26,7 +21,8 @@
 		return
 	if(AM.loc != src) 	// Multi-tile objects are "in" multiple locs but its loc is it's true placement.
 		return			// Don't move multi tile objects if their origin isnt in transit
-	if(SSftl_navigation.ftl_state != FTL_JUMPING) return //Only throw if we are in transit
+	if(SSftl_navigation.ftl_state != FTL_JUMPING)
+		return //Only throw if we are in transit
 	var/max = world.maxx-TRANSITIONEDGE
 	var/min = 1+TRANSITIONEDGE
 
