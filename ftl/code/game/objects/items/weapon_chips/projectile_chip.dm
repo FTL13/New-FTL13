@@ -3,10 +3,10 @@
 	var/shots_fired = 1
 	var/projectile_icon = "laser"
 
-/obj/item/weapon_chip/projectile/WeaponVisuals(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info)
+/obj/item/weapon_chip/projectile/weapon_visuals(var/turf/open/indestructible/ftlfloor/T)
 	.=..()
 	for(var/i in 1 to shots_fired) //Fire for the amount of time
-		addtimer(CALLBACK(src, .proc/SpawnProjectile, T, attack_info), fire_delay*i)
+		addtimer(CALLBACK(src, .proc/SpawnProjectile, T), fire_delay*i)
 
 /obj/item/weapon_chip/projectile/proc/SpawnProjectile() //Projectile that flies out of the gun and dissapears, exists for visual aesthetic
 	var/obj/item/projectile/ship_projectile/A = new(weapon.loc)
@@ -22,7 +22,7 @@
 
 	playsound(weapon, attack_info.fire_sound, 50, 1)
 
-/obj/item/weapon_chip/projectile/ShootShip(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info) //Real attack
+/obj/item/weapon_chip/projectile/hit_ship(var/turf/open/indestructible/ftlfloor/T) //Real attack
 	
 	var/pix_x
 	var/pix_y

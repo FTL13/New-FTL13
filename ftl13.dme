@@ -15,4 +15,19 @@
 #include "tgstation.dme"
 
 // BEGIN_INCLUDE
+#include "ftl\code\controllers\subsystem\ships.dm"
+#include "ftl\code\datums\shipattacks\player_attacks\player_attack.dm"
+#include "ftl\code\datums\ships\shiproom.dm"
+#include "ftl\code\datums\ships\shiptemplates.dm"
+#include "ftl\code\datums\ships\starship.dm"
+#include "ftl\code\datums\ships\shiprooms\shiprooms.dm"
+#include "ftl\code\game\area\areas.dm"
+#include "ftl\code\game\area\shiprooms.dm"
+#include "ftl\code\game\machinery\shipweapon.dm"
+#include "ftl\code\game\machinery\computer\weapons_console.dm"
+#include "ftl\code\game\objects\effects\shipspawn.dm"
+#include "ftl\code\game\objects\items\weapon_chips\projectile_chip.dm"
+#include "ftl\code\game\objects\items\weapon_chips\ship_projectile.dm"
+#include "ftl\code\game\objects\items\weapon_chips\weapon_chip.dm"
+#include "ftl\code\game\turfs\shipturfs.dm"
 // END_INCLUDE
