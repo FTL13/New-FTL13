@@ -27,8 +27,10 @@ obj/item/projectile/ship_projectile //Is purely visual, unless you stand infront
 /obj/effect/ship_target/ex_act()
 	return
 
-/obj/effect/ship_projectile/Initialize(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info, var/matrix/M, var/duration = 20)
+/obj/effect/ship_projectile/Initialize(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info, var/matrix/M, pix_x, pix_y var/duration = 20)
 	. = ..()
+	pixel_x = pix_x
+	pixel_y = pix_y
 	transform = M //rotates projectile in direction
 	message_admins("projectile is flying in now")
 	animate(src, pixel_x = 0, pixel_y = 0, time = duration)

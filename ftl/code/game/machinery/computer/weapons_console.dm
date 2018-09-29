@@ -4,10 +4,8 @@
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "camera_target"
 	use_static = USE_STATIC_NONE
-
-/mob/camera/aiEye/remote/weapons/Initialize()
-	.=..()
-	JumpToShip()
+	invisibility = 0
+	move_delay = 2
 
 /mob/camera/aiEye/remote/weapons/setLoc(var/t)
 	var/area/new_area = get_area(t)
@@ -33,7 +31,6 @@
 
 	var/obj/machinery/power/shipweapon/ourweapon //The weapon we are linked to
 
-
 /obj/machinery/computer/camera_advanced/weapons/Initialize()
 	. = ..()
 	fire_weapon_action = new
@@ -47,8 +44,20 @@
 	eyeobj.icon = 'icons/obj/abductor.dmi'
 	eyeobj.icon_state = "camera_target"
 
+/obj/machinery/computer/camera_advanced/give_eye_control(mob/user)
+	GrantActions(user)
+	current_user = user
+	eyeobj.eye_user = user
+	eyeobj.name = "Camera Eye ([user.name])"
+	user.remote_control = eyeobj
+	user.reset_perspective(eyeobj)
+	eyeobj.JumpToShip()
+
 /obj/machinery/computer/camera_advanced/weapons/GrantActions(mob/living/user)
-	..()
+	if(off_action)
+		off_action.target = user
+		off_action.Grant(user)
+		actions += off_action
 
 	if(fire_weapon_action)
 		fire_weapon_action.target = src

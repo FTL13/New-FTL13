@@ -23,8 +23,23 @@
 	playsound(weapon, attack_info.fire_sound, 50, 1)
 
 /obj/item/weapon_chip/projectile/ShootShip(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info) //Real attack
+	
+	var/pix_x
+	var/pix_y
+	var/angle = 0
+	var/rand_coord = rand(-1000,1000)
+	var/list/rand_edge = list(1,-1)
+	if(prob(50)) // gets random location at the edge of a box
+		pix_x = rand_coord
+		pix_y = pick(rand_edge) * 1000
+	else
+		pix_x = pick(rand_edge) * 1000
+		pix_y = rand_coord
+	angle = ATAN2(0-pix_y, 0-pix_x)
+	var/matrix/M = new
+	M.Turn(angle + 180)
+
 	var/datum/starship/S = T.GetOurShip()
-	var/matrix/M = RandomAimMatrix() //From what direction will we hit the shield?
 	message_admins("fire real projectile")
 	for(var/i in 1 to shots_fired)
 		if(prob(S.get_dodge_chance()))
@@ -34,26 +49,11 @@
 			S.ShieldHit(attack_info)
 			message_admins("shield")
 			return
-		addtimer(CALLBACK(src, .proc/SpawnShipProjectile, T, attack_info, M), fire_delay*i)
+		addtimer(CALLBACK(src, .proc/SpawnShipProjectile, T, attack_info, M, pix_x, pix_y), fire_delay*i)
 
 /obj/item/weapon_chip/projectile/proc/SpawnShipProjectile(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info) //projectile that actually hits the ship
 	var/obj/effect/ship_projectile/A = new(T, attack_info)
 	A.icon_state = projectile_icon
-
-/obj/item/weapon_chip/projectile/proc/RandomAimMatrix() //projectile that actually hits the ship
-	var/angle = 0
-	var/rand_coord = rand(-1000,1000)
-	var/list/rand_edge = list(1,-1)
-	if(prob(50)) // gets random location at the edge of a box
-		pixel_x = rand_coord
-		pixel_y = pick(rand_edge) * 1000
-	else
-		pixel_x = pick(rand_edge) * 1000
-		pixel_y = rand_coord
-	angle = ATAN2(0-pixel_y, 0-pixel_x)
-	var/matrix/M = new
-	M.Turn(angle + 180)
-	return M
 
 /obj/item/weapon_chip/projectile/phase
 	fire_delay = 5 //Time between shots
