@@ -46,21 +46,6 @@ SUBSYSTEM_DEF(ftl_navigation)
 		var/datum/sector/S = sector_typeless
 		generate_connecting_sectors(S)
 
-	var/timer = world.timeofday
-	var/count = 0
-	var/msg
-	for(var/z in SSmapping.levels_by_trait(ZTRAIT_STATION)) //Temp fix to make any map work with ftl transit states
-		for(var/turf/T in block(locate(1,1,z), locate(255,255,z)))
-			if(T.type == /turf/open/space || T.type == /turf/open/space/basic) //I want types only, not subtypes too
-				T.ChangeTurf(/turf/open/space/transit/ftl)
-				count ++
-	if(count > 0)
-		msg = "Psst hey. I just lagged the server for [(world.timeofday - timer)/10] seconds due to [count] wrong space tiles on the ship z level. Use /turf/open/space/transit/ftl instead"
-		to_chat(world, "<span class='boldannounce'>[msg]</span>")
-		warning(msg)
-
-	//baseturf code when floyd is done with SpaceManiac goes here???
-
 	return ..()
 
 

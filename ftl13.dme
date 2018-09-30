@@ -15,10 +15,13 @@
 #include "tgstation.dme"
 
 // BEGIN_INCLUDE
+#include "_maps\_FTL\_basemap.dm"
 #include "code\__DEFINES\~ftl_defines\ftl_navigation.dm"
 #include "code\__DEFINES\~ftl_defines\subsystem.dm"
 #include "ftl\code\controllers\subsystem\ftl_navigation.dm"
 #include "ftl\code\datums\sector.dm"
+#include "ftl\code\game\objects\effects\player_ship_spawn.dm"
 #include "ftl\code\machinery\computer\navigation_computer.dm"
+#include "ftl\code\modules\unit_tests\_unit_tests.dm"
 #include "ftl\code\turfs\ftl_space.dm"
 // END_INCLUDE
