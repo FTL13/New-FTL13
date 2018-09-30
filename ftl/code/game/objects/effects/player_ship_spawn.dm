@@ -1,7 +1,6 @@
 /obj/effect/landmark/player_ship_spawn
   name = "Player ship spawn marker"
-
-  var/template_name = '_maps/_FTL/map_files/testship/testship.dmm' //Change this in your maps X_transit.dmm
+  var/template_name = '_maps/_FTL/map_files/testship/testship.dmm'
 
 /obj/effect/landmark/player_ship_spawn/Initialize()
   . = ..()
