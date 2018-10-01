@@ -3,7 +3,7 @@
 
 #ifndef LOWMEMORYMODE
 	#ifdef ALL_MAPS
-		#include "_maps\_FTL\map_files\testship\testship_transit.dmm"
-		#include "_maps\_FTL\map_files\testship\testship.dmm"
+		#include "map_files\testship\testship_transit.dmm"
+		#include "map_files\testship\testship.dmm"
 	#endif
 #endif
