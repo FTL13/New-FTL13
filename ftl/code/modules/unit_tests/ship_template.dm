@@ -12,6 +12,6 @@
           count[T] += 1
     if(count.len > 0)
       for(var/turf in count)
-        failreason += "[count[turf]] '[turf]' exist within the grid models of '[initial(spawner.template_name)]'. Replace with '/turf/open/space/transit/ftl' | "
+        failreason += "[count[turf]] '[turf]' exist within the grid models of '[initial(spawner.template_name)]'. Replace with '/turf/template_noop' | "
   if(failreason)
     Fail(failreason)
