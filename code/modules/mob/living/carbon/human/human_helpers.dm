@@ -11,8 +11,8 @@
 
 //gets assignment from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
-/mob/living/carbon/human/proc/get_assignment(if_no_id = "No id", if_no_job = "No job")
-	var/obj/item/card/id/id = get_idcard()
+/mob/living/carbon/human/proc/get_assignment(if_no_id = "No id", if_no_job = "No job", hand_first = TRUE)
+	var/obj/item/card/id/id = get_idcard(hand_first)
 	if(id)
 		. = id.assignment
 	else
@@ -27,7 +27,7 @@
 //gets name from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
 /mob/living/carbon/human/proc/get_authentification_name(if_no_id = "Unknown")
-	var/obj/item/card/id/id = get_idcard()
+	var/obj/item/card/id/id = get_idcard(FALSE)
 	if(id)
 		return id.registered_name
 	var/obj/item/pda/pda = wear_id
@@ -85,10 +85,6 @@
 		. = if_no_id	//to prevent null-names making the mob unclickable
 	return
 
-<<<<<<< HEAD
-//gets ID card object from special clothes slot or null.
-/mob/living/carbon/human/get_idcard()
-=======
 //Gets ID card from a human. If hand_first is false the one in the id slot is prioritized, otherwise inventory slots go first.
 /mob/living/carbon/human/get_idcard(hand_first = TRUE)
 	//Check hands
@@ -109,10 +105,14 @@
 			. = id_card
 
 	//Check inventory slots
->>>>>>> 5a24356b77... Fixes ID cards not working with vendors (#40673)
 	if(wear_id)
-		return wear_id.GetID()
-
+		id_card = wear_id.GetID()
+		if(id_card)
+			return id_card
+	else if(belt)
+		id_card = belt.GetID()
+		if(id_card)
+			return id_card
 
 /mob/living/carbon/human/IsAdvancedToolUser()
 	if(has_trait(TRAIT_MONKEYLIKE))
