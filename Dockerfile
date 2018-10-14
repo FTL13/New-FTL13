@@ -1,8 +1,4 @@
 FROM tgstation/byond:512.1453 as base
-<<<<<<< HEAD
-#above version must be the same as the one in dependencies.sh
-=======
->>>>>>> 179d330a54... Update Travis BYOND and remove a lie (#40878)
 
 FROM base as build_base
 
