@@ -75,7 +75,7 @@
 
 	if(href_list["details"])
 		mode = "Details"
-		sector_details = SSftl_navigation.all_sectors(href_list["details"])
+		sector_details = SSftl_navigation.all_sectors[href_list["details"]]
 	else if(href_list["jump"])
 		mode = "Spoolup"
 		updateUsrDialog()
