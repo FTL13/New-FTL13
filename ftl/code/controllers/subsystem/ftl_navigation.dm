@@ -47,19 +47,14 @@ SUBSYSTEM_DEF(ftl_navigation)
 		generate_connecting_sectors(S)
 
 	return ..()
-
-
-/datum/controller/subsystem/ftl_navigation/proc/get_sector(sectorid)
-	return all_sectors[sectorid]
-
-
-
+	
+	
 
 /datum/controller/subsystem/ftl_navigation/proc/ftl_init_spoolup(sectorid)
 	if(ftl_state != FTL_IDLE)
 		return
 	ftl_state = FTL_SPOOLUP //Setting early to prevent multiple spoolups
-	var/datum/sector/S = get_sector(sectorid)
+	var/datum/sector/S = all_sectors[sectorid]
 	if(!S)
 		return
 	to_sector = S
