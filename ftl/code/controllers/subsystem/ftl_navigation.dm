@@ -21,6 +21,12 @@ SUBSYSTEM_DEF(ftl_navigation)
 
 	var/list/sector_types = list()
 	var/list/planet_types = list()
+	
+	var/parallax_layer1_icon = "empty"
+	var/parallax_planet_icon = "habitable"
+	
+	var/list/parallax_layer1 = list()
+	var/list/parallax_planets = list()
 
 	var/list/nav_consoles = list()
 
@@ -48,6 +54,27 @@ SUBSYSTEM_DEF(ftl_navigation)
 
 	return ..()
 	
+	
+/datum/controller/subsystem/ftl_navigation/proc/update_layer1_parallax(var/newicon)
+	parallax_layer1_icon = newicon
+	for(var/thing in parallax_layer1)
+		var/obj/screen/parallax_layer/layer_1/L = thing
+		L.icon_state = parallax_layer1_icon
+		
+	for(var/thing_client in GLOB.clients)
+		var/client/C = thing_client
+		C.parallax_layers_cached[1].update_o(C.view) //We only want to update the topmost layer
+		
+/datum/controller/subsystem/ftl_navigation/proc/update_planet_parallax(var/newicon)
+	parallax_planet_icon = newicon
+	for(var/thing in parallax_planets)
+		var/obj/screen/parallax_layer/planet/P = thing
+		P.icon_state = parallax_planet_icon
+		
+/datum/controller/subsystem/ftl_navigation/proc/update_planet_alpha(var/A = 255)
+	for(var/thing in parallax_planets)
+		var/obj/screen/parallax_layer/planet/P = thing
+		P.alpha = A
 	
 
 /datum/controller/subsystem/ftl_navigation/proc/ftl_init_spoolup(sectorid)
@@ -86,16 +113,21 @@ SUBSYSTEM_DEF(ftl_navigation)
 
 
 /datum/controller/subsystem/ftl_navigation/proc/ftl_transition(var/ftl_start = TRUE)
-	message_admins("Changing FTL effects")
 	ftl_parallax(ftl_start)
 	ftl_handle_transit_turfs(ftl_start)
 	if(ftl_start)
+		update_layer1_parallax("transit")
+		update_planet_alpha(0)
 		current_sector = null
 		ftl_state = FTL_JUMPING
 		ftl_message("FTL has begun")
 		addtimer(CALLBACK(src, .proc/ftl_transition, FALSE), 100) //Time spent in FTL
 	else
 		leave_ftl()
+		update_layer1_parallax(current_sector.parallax_icon)
+		if(current_sector.planet)
+			update_planet_parallax(current_sector.planet.parallax_icon)
+			update_planet_alpha(255)
 
 
 /datum/controller/subsystem/ftl_navigation/proc/leave_ftl()
@@ -107,7 +139,6 @@ SUBSYSTEM_DEF(ftl_navigation)
 		var/datum/sector/sector_to_gen = sector_type
 		generate_connecting_sectors(sector_to_gen)
 	ftl_state = FTL_IDLE
-	ftl_message("FTL has ended")
 
 
 /datum/controller/subsystem/ftl_navigation/proc/ftl_parallax(var/ftl_start = TRUE)
@@ -129,7 +160,6 @@ SUBSYSTEM_DEF(ftl_navigation)
 	else
 		throw_dir = EAST
 		flavor_text = "<span class='notice'>You feel the ship lurch as it exits FTL.</span>"
-	var/starttime = world.timeofday
 	for(var/z in SSmapping.levels_by_trait(ZTRAIT_STATION))
 		for(var/returned_turf in block(locate(1,1,z), locate(255,255,z)))
 			CHECK_TICK
@@ -153,7 +183,6 @@ SUBSYSTEM_DEF(ftl_navigation)
 						M.throw_at(target,range,speed)
 					if(jump_knockdown_force)
 						M.Knockdown(jump_knockdown_force)
-	message_admins("Fake FTL effects took [(world.timeofday - starttime)/10] seconds")
 
 
 /datum/controller/subsystem/ftl_navigation/proc/ftl_message(var/message, var/sound_effect)
