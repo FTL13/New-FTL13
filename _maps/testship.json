@@ -3,9 +3,10 @@
     "map_path": "_FTL/map_files/testship",
     "map_file": "testship_transit.dmm",
     "shuttles": {
-	    "cargo": "cargo_box",
-	    "ferry": "ferry_fancy",
-	    "whiteship": "whiteship_box",
-	    "emergency": "emergency_box"
-    }
+	    "cargo": "cargo_box"
+    },
+   "traits": [{"Linkage": "Self"}, {"Space Ruins": false}],
+   "space_ruin_levels": 0,
+   "space_empty_levels": 0,
+   "minetype": "null"
 }
