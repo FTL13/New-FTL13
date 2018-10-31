@@ -1,5 +1,4 @@
-FROM tgstation/byond:512.1448 as base
-#above version must be the same as the one in dependencies.sh
+FROM tgstation/byond:512.1453 as base
 
 FROM base as build_base
 
@@ -66,7 +65,7 @@ FROM dm_base as build
 
 COPY . .
 
-RUN DreamMaker -max_errors 0 tgstation.dme && tools/deploy.sh /deploy
+RUN DreamMaker -max_errors 0 ftl13.dme && tools/deploy.sh /deploy
 
 FROM dm_base
 
@@ -88,4 +87,4 @@ RUN ln -s /tgstation/libBSQL.so /root/.byond/bin/libBSQL.so
 
 VOLUME [ "/tgstation/config", "/tgstation/data" ]
 
-ENTRYPOINT [ "DreamDaemon", "tgstation.dmb", "-port", "1337", "-trusted", "-close", "-verbose" ]
+ENTRYPOINT [ "DreamDaemon", "ftl13.dmb", "-port", "1337", "-trusted", "-close", "-verbose" ]

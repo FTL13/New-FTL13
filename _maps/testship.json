@@ -1,0 +1,11 @@
+{
+    "map_name": "testship",
+    "map_path": "_FTL/map_files/testship",
+    "map_file": "testship_transit.dmm",
+    "shuttles": {
+	    "cargo": "cargo_box",
+	    "ferry": "ferry_fancy",
+	    "whiteship": "whiteship_box",
+	    "emergency": "emergency_box"
+    }
+}
