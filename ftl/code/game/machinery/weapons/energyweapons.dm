@@ -6,14 +6,12 @@
 	var/charge_rate = 400 //5 second fire rate with phase cannons
 	var/current_charge = 5000
 
-	var/obj/item/weapon_chip/chip = new /obj/item/weapon_chip/projectile/phase
+	var/obj/item/weapon_chip/chip = new /obj/item/weapon_chip/projectile/phase //This defines our behavior when we fire.
 
 /obj/machinery/shipweapon/energy/Initialize()
 	. = ..()
 	if(chip)
-		name = chip.weapon_name
-		desc = chip.weapon_desc
-		chip.weapon = src
+		update_chip()
 
 /obj/machinery/shipweapon/energy/process()
 	. = ..()
@@ -42,11 +40,8 @@
 	. = ..()
 	if(istype(W, /obj/item/weapon_chip) && !chip)
 		if(!user.transferItemToLoc(W, src)) return
-		name = chip.weapon_name
-		desc = chip.weapon_desc
 		chip = W
-		current_charge = 0
-		chip.weapon = src
+		update_chip()
 		W.loc = src
 		W.add_fingerprint(user)
 		to_chat(user, "<span class='notice'>You install \the [W] into \the [src].</span>")
@@ -74,3 +69,9 @@
 		icon_state = "[chip.icon_name]_fire"
 	else
 		icon_state = "[chip.icon_name]"
+
+/obj/machinery/shipweapon/energy/proc/update_chip()
+	name = chip.weapon_name
+	desc = chip.weapon_desc
+	chip.weapon = src
+	current_charge = 0

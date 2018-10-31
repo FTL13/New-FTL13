@@ -5,7 +5,6 @@
 	icon_state = "camera_target"
 	use_static = USE_STATIC_NONE
 	invisibility = 0
-	move_delay = 2
 
 /mob/camera/aiEye/remote/weapons/setLoc(var/t)
 	var/area/new_area = get_area(t)
@@ -29,7 +28,7 @@
 	var/datum/action/innate/fire_weapon/fire_weapon_action
 	var/datum/action/innate/jump_to_ship/jump_to_ship_action
 
-	var/obj/machinery/power/shipweapon/ourweapon //The weapon we are linked to
+	var/obj/machinery/shipweapon/ourweapon //The weapon we are linked to
 
 /obj/machinery/computer/camera_advanced/weapons/Initialize()
 	. = ..()
@@ -51,7 +50,8 @@
 	eyeobj.name = "Camera Eye ([user.name])"
 	user.remote_control = eyeobj
 	user.reset_perspective(eyeobj)
-	eyeobj.JumpToShip()
+	var/mob/camera/aiEye/remote/weapons/W = eyeobj
+	W.JumpToShip()
 
 /obj/machinery/computer/camera_advanced/weapons/GrantActions(mob/living/user)
 	if(off_action)
@@ -107,8 +107,8 @@
 		return
 	var/mob/living/C = owner
 	var/mob/camera/aiEye/remote/weapons/remote_eye = C.remote_control
-	remote_eye.JumpToShip()
-
+	var/mob/camera/aiEye/remote/weapons/W = remote_eye
+	W.JumpToShip()
 
 
 

@@ -11,10 +11,6 @@
 
 	var/shot_travel_time = 0 //Time it takes between firing, and shot reaching enemy ship.
 
-/obj/machinery/shipweapon/Initialize()
-	. = ..()
-	connect_to_network()
-
 /obj/machinery/shipweapon/Destroy(force)
 	if(force) //Is an admin actually trying to delete it?
 		..()
@@ -24,9 +20,6 @@
 /obj/machinery/shipweapon/process()
 	. = ..()
 	if(stat & (BROKEN|MAINT))
-		return
-	if(!chip)
-		current_charge = 0
 		return
 	if(can_fire()) //Load goes down if we can fire
 		update_icon()
@@ -40,9 +33,8 @@
 	if(!can_fire())
 		to_chat(user, "<span class='notice'>\the [src] is not ready to fire.</span>")
 		return FALSE
-	//current_charge = 0
 	to_chat(user, "<span class='notice'>You fire \the [src]!</span>")
-	weapon_visuals(T, attack_info)
+	weapon_visuals(T)
 	addtimer(CALLBACK(src, .proc/hit_ship, T), shot_travel_time) //After shot_travel_time, actually send the shot to the enemy ship.
 	after_fire() //Extra options such as resetting charge after firing
 	update_icon()
@@ -55,7 +47,7 @@
 /obj/machinery/shipweapon/proc/weapon_visuals(T) //Visuals of the weapon itself.
 	if(prob(35)) //Random chance to spark
 		var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
-		s.set_up(5, 1, weapon)
+		s.set_up(5, 1, src)
 		s.start()
 	return
 

@@ -10,7 +10,7 @@
 
 	var/datum/player_attack/attack_info = new
 
-	var/obj/machinery/power/shipweapon/weapon
+	var/obj/machinery/shipweapon/energy/weapon
 	var/charge_to_fire = 2000
 
 /obj/item/weapon_chip/proc/weapon_visuals(var/turf/open/indestructible/ftlfloor/T)

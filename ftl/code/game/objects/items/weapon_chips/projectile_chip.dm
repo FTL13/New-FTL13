@@ -40,6 +40,7 @@
 	M.Turn(angle + 180)
 
 	var/datum/starship/S = T.GetOurShip()
+
 	message_admins("fire real projectile")
 	for(var/i in 1 to shots_fired)
 		if(prob(S.get_dodge_chance()))
@@ -51,8 +52,8 @@
 			return
 		addtimer(CALLBACK(src, .proc/SpawnShipProjectile, T, attack_info, M, pix_x, pix_y), fire_delay*i)
 
-/obj/item/weapon_chip/projectile/proc/SpawnShipProjectile(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info) //projectile that actually hits the ship
-	var/obj/effect/ship_projectile/A = new(T, attack_info)
+/obj/item/weapon_chip/projectile/proc/SpawnShipProjectile(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info, var/matrix/M, var/pix_x, var/pix_y) //projectile that actually hits the ship
+	var/obj/effect/ship_projectile/A = new(T, attack_info, M, pix_x, pix_y)
 	A.icon_state = projectile_icon
 
 /obj/item/weapon_chip/projectile/phase
