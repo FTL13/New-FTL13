@@ -12,6 +12,7 @@
 
 	var/obj/machinery/shipweapon/energy/weapon
 	var/charge_to_fire = 2000
+	var/shot_travel_time = 50
 
 /obj/item/weapon_chip/proc/weapon_visuals(var/turf/open/indestructible/ftlfloor/T)
 	return

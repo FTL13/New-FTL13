@@ -45,11 +45,11 @@
 	for(var/i in 1 to shots_fired)
 		if(prob(S.get_dodge_chance()))
 			message_admins("shot missed")
-			return
+			continue
 		if(S.shield_integrity) //shot blocked by shields TODO: Make this visibly hit the shields and add actual visual shields.
 			S.ShieldHit(attack_info)
 			message_admins("shield")
-			return
+			continue
 		addtimer(CALLBACK(src, .proc/SpawnShipProjectile, T, attack_info, M, pix_x, pix_y), fire_delay*i)
 
 /obj/item/weapon_chip/projectile/proc/SpawnShipProjectile(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info, var/matrix/M, var/pix_x, var/pix_y) //projectile that actually hits the ship

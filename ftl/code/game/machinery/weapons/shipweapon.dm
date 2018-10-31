@@ -9,8 +9,6 @@
 	anchored = TRUE
 	density = TRUE
 
-	var/shot_travel_time = 0 //Time it takes between firing, and shot reaching enemy ship.
-
 /obj/machinery/shipweapon/Destroy(force)
 	if(force) //Is an admin actually trying to delete it?
 		..()
@@ -35,7 +33,7 @@
 		return FALSE
 	to_chat(user, "<span class='notice'>You fire \the [src]!</span>")
 	weapon_visuals(T)
-	addtimer(CALLBACK(src, .proc/hit_ship, T), shot_travel_time) //After shot_travel_time, actually send the shot to the enemy ship.
+	addtimer(CALLBACK(src, .proc/hit_ship, T), get_shot_travel_time()) //After shot_travel_time, actually send the shot to the enemy ship.
 	after_fire() //Extra options such as resetting charge after firing
 	update_icon()
 
@@ -43,6 +41,9 @@
 
 /obj/machinery/shipweapon/proc/after_fire()
 	return
+
+/obj/machinery/shipweapon/proc/get_shot_travel_time()
+	return 0
 
 /obj/machinery/shipweapon/proc/weapon_visuals(T) //Visuals of the weapon itself.
 	if(prob(35)) //Random chance to spark

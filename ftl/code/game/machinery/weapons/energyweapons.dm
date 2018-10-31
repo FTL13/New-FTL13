@@ -12,6 +12,7 @@
 	. = ..()
 	if(chip)
 		update_chip()
+	current_charge = 5000 //remove this after debugging is done
 
 /obj/machinery/shipweapon/energy/process()
 	. = ..()
@@ -28,6 +29,9 @@
 /obj/machinery/shipweapon/energy/after_fire()
 	//current_charge = 0
 	return
+
+/obj/machinery/shipweapon/energy/get_shot_travel_time()
+	return (chip?.shot_travel_time)
 
 /obj/machinery/shipweapon/energy/weapon_visuals(T) //Visuals of the weapon itself.
 	chip.weapon_visuals(T)

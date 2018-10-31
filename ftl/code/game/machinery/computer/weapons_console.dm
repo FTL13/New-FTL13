@@ -1,8 +1,8 @@
 //Weapons console
 /mob/camera/aiEye/remote/weapons
 	visible_icon = 1
-	icon = 'icons/obj/abductor.dmi'
-	icon_state = "camera_target"
+	icon = 'icons/mob/cameramob.dmi'
+	icon_state = "generic_camera"
 	use_static = USE_STATIC_NONE
 	invisibility = 0
 
