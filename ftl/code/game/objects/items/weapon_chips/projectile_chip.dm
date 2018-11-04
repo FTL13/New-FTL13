@@ -11,13 +11,12 @@
 /obj/item/weapon_chip/projectile/proc/SpawnProjectile() //Projectile that flies out of the gun and dissapears, exists for visual aesthetic
 	var/obj/item/projectile/ship_projectile/A = new(weapon.loc)
 	A.icon_state =  projectile_icon
-	A.setDir(EAST)
 	A.pixel_x = 32
 	A.pixel_y = 12
 	A.yo = 0
 	A.xo = 20
 	A.starting = weapon
-	A.fire()
+	A.fire(EAST)
 	message_admins("pew")
 
 	playsound(weapon, attack_info.fire_sound, 50, 1)
@@ -41,6 +40,9 @@
 
 	var/datum/starship/S = T.GetOurShip()
 
+	if(!S)
+		message_admins("PANIC NO SHIP AAA")	
+
 	message_admins("fire real projectile")
 	for(var/i in 1 to shots_fired)
 		if(prob(S.get_dodge_chance()))
@@ -50,7 +52,8 @@
 			S.ShieldHit(attack_info)
 			message_admins("shield")
 			continue
-		addtimer(CALLBACK(src, .proc/SpawnShipProjectile, T, attack_info, M, pix_x, pix_y), fire_delay*i)
+		addtimer(CALLBACK(src, .proc/SpawnShipProjectile, T, M, pix_x, pix_y), fire_delay*i)
+		addtimer(CALLBACK(T, /turf/open/indestructible/ftlfloor/.proc/HitByShipProjectile, loc, attack_info), fire_delay*i)
 
 /obj/item/weapon_chip/projectile/proc/SpawnShipProjectile(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info, var/matrix/M, var/pix_x, var/pix_y) //projectile that actually hits the ship
 	var/obj/effect/ship_projectile/A = new(T, attack_info, M, pix_x, pix_y)

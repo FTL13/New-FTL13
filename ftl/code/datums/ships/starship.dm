@@ -75,7 +75,7 @@
 		CHECK_TICK
 
 /datum/starship/proc/adjust_hull(value) //use this to change hull level or i kill you
-	hull_integrity = max(hull_integrity + value, initial(hull_integrity))
+	hull_integrity = min(hull_integrity + value, initial(hull_integrity))
 	if(hull_integrity <= 0)
 		qdel(src) //we dead
 

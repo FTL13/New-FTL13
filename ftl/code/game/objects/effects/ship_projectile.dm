@@ -27,18 +27,17 @@ obj/item/projectile/ship_projectile //Is purely visual, unless you stand infront
 /obj/effect/ship_target/ex_act()
 	return
 
-/obj/effect/ship_projectile/Initialize(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info, var/matrix/M, pix_x, pix_y, var/duration = 20)
+/obj/effect/ship_projectile/Initialize(var/turf/open/indestructible/ftlfloor/T, var/matrix/M, pix_x, pix_y, var/duration = 20)
 	. = ..()
 	pixel_x = pix_x
 	pixel_y = pix_y
 	transform = M //rotates projectile in direction
 	message_admins("projectile is flying in now")
 	animate(src, pixel_x = 0, pixel_y = 0, time = duration)
-	addtimer(CALLBACK(src, .proc/hit, loc, attack_info), duration)
+	addtimer(CALLBACK(src, .proc/hit, loc), duration)
 
 
-/obj/effect/ship_projectile/proc/hit(var/turf/open/indestructible/ftlfloor/T, var/datum/attack_info)
-	T.HitByShipProjectile(attack_info)
+/obj/effect/ship_projectile/proc/hit(var/turf/open/indestructible/ftlfloor/T)
 	layer = 0.1 //to prevent it from being seen while we wait for it to be deleted
 	explosion(T,1,1,1,1)
 	message_admins("projectile is kill")
