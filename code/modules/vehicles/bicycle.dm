@@ -9,6 +9,7 @@
 	D.set_riding_offsets(RIDING_OFFSET_ALL, list(TEXT_NORTH = list(0, 4), TEXT_SOUTH = list(0, 4), TEXT_EAST = list(0, 4), TEXT_WEST = list( 0, 4)))
 	D.vehicle_move_delay = 0
 
+
 /obj/vehicle/ridden/bicycle/tesla_act() // :::^^^)))
 	name = "fried bicycle"
 	desc = "Well spent."
