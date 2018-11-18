@@ -25,17 +25,20 @@
 
 	var/map = "[prefix][combat_map]"
 	template = new(map)
-	template.load(T, TRUE)
+	var/list/bounds = template.load(T, TRUE)
+
+	var/list/turfs = block(	locate(bounds[MAP_MINX], bounds[MAP_MINY], bounds[MAP_MINZ]),
+							locate(bounds[MAP_MAXX], bounds[MAP_MAXY], bounds[MAP_MAXZ]))
 
 	src.ship_spawn_slot = ship_spawn_slot
 	SSships.ShipSpawnLocations[ship_spawn_slot] = FALSE //This slot is taken now, cya chump.
 
 	var/shipareas
-	for(var/turf/open/indestructible/ftlfloor/floor in template.get_affected_turfs(src.ship_spawn_slot.loc))
+	for(var/turf/open/indestructible/ftlfloor/floor in turfs)
 		floor.unique_id = unique_id
 
 		var/area/ftl/shiproom/A = get_area(floor)
-		if(!shiprooms.Find(A))
+		if(shiprooms.Find(A))
 			continue
 
 		shipareas += A
