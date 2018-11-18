@@ -16,7 +16,7 @@
 	A.yo = 0
 	A.xo = 20
 	A.starting = weapon
-	A.fire(EAST)
+	A.fire(dir2angle(weapon.dir))
 	message_admins("pew")
 
 	playsound(weapon, attack_info.fire_sound, 50, 1)
