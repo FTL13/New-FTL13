@@ -252,10 +252,6 @@
 				visible_message("<span class='danger'>[usr] [internal ? "opens" : "closes"] the valve on [src]'s [ITEM.name].</span>", \
 								"<span class='userdanger'>[usr] [internal ? "opens" : "closes"] the valve on [src]'s [ITEM.name].</span>")
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 51af787754... Cleanup
 /mob/living/carbon/fall(forced)
     loc.handle_fall(src, forced)//it's loc so it doesn't call the mob's handle_fall which does nothing
 
@@ -908,7 +904,7 @@
 	for(var/X in internal_organs)
 		var/obj/item/organ/I = X
 		I.Insert(src)
-		
+
 /mob/living/carbon/proc/update_disabled_bodyparts()
 	for(var/B in bodyparts)
 		var/obj/item/bodypart/BP = B
