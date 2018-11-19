@@ -1,7 +1,5 @@
 // Radios use a large variety of predefined frequencies.
 
-<<<<<<< HEAD
-=======
 //say based modes like binary are in living/say.dm
 
 #define RADIO_CHANNEL_COMMON "Common"
@@ -52,7 +50,6 @@
 #define RADIO_CHANNEL_CTF_BLUE "Blue Team"
 
 
->>>>>>> f55196f765... Redundant
 #define MIN_FREE_FREQ 1201 // -------------------------------------------------
 // Frequencies are always odd numbers and range from 1201 to 1599.
 
