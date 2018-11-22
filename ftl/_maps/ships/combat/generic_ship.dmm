@@ -1,0 +1,26 @@
+"a" = (/turf/template_noop,/area/space)
+"b" = (/turf/closed/indestructible/ftlwall,/area/space)
+"c" = (/turf/open/indestructible/ftlfloor,/area/ftl/shiproom/weapons)
+"d" = (/turf/closed/indestructible/ftlwall,/area/ftl/shipwall)
+"e" = (/turf/open/indestructible/ftlfloor,/area/ftl/shiproom/engine)
+"f" = (/turf/open/indestructible/ftlfloor,/area/ftl/shiproom)
+"g" = (/turf/open/indestructible/ftlfloor,/area/ftl/shiproom/bridge)
+"h" = (/turf/open/indestructible/ftlfloor,/area/ftl/shiproom/shields)
+
+(1,1,1) = {"
+aaaaaaabbbbbbbbbbbaaaaa
+aaaaaaabcccccccccbaaaaa
+aaaaaaabcccccccccbbbbbb
+aaaaaaabcccccccccdeeeeb
+abbbbbbbddddfdddddeeeeb
+bbbggggdfffffffffdeeeeb
+bggggggdffffffffffeeeeb
+bggggggffffffffffdeeeeb
+bggggggdffffffffffeeeeb
+bbbggggdfffffffffdeeeeb
+abbbbbbbddddfdddddeeeeb
+aaaaaaabhhhhhhhhhdeeeeb
+aaaaaaabhhhhhhhhhbbbbbb
+aaaaaaabhhhhhhhhhbaaaaa
+aaaaaaabbbbbbbbbbbaaaaa
+"}
