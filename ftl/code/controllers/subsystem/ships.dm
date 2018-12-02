@@ -2,6 +2,7 @@ SUBSYSTEM_DEF(ships)
 	name = "Ships"
 	wait = 10
 	init_order = -3
+	flags = SS_NO_FIRE
 
 	var/list/currentships = list()
 	var/list/ShipSpawnLocations = list() //Assoc list of key value Ship_spawn landmark and boolean value. TRUE means it is free
