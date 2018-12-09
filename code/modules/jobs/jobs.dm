@@ -95,7 +95,7 @@ GLOBAL_PROTECT(exp_specialmap)
 		if(J.title == job_title)
 			return J.department_head //this is a list
 
-/proc/get_full_job_name(job) // this only gets used once in the entire code base lmao, and it's in some vocal cord surgery
+/proc/get_full_job_name(job)
 	var/static/regex/cap_expand = new("cap(?!tain)")
 	var/static/regex/cmo_expand = new("cmo")
 	var/static/regex/hos_expand = new("hos")
