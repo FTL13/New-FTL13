@@ -120,6 +120,7 @@ SUBSYSTEM_DEF(ftl_navigation)
 		update_planet_alpha(0)
 		current_sector = null
 		ftl_state = FTL_JUMPING
+		SSships.DelAllShips()
 		ftl_message("FTL has begun")
 		addtimer(CALLBACK(src, .proc/ftl_transition, FALSE), 100) //Time spent in FTL
 	else
@@ -135,6 +136,8 @@ SUBSYSTEM_DEF(ftl_navigation)
 	current_sector.visited = TRUE
 	visited_sectors += to_sector
 	to_sector = null
+	if(current_sector.ship_to_spawn)
+		SSships.CreateShip(current_sector.ship_to_spawn)
 	for(var/sector_type in current_sector.connected_sectors)
 		var/datum/sector/sector_to_gen = sector_type
 		generate_connecting_sectors(sector_to_gen)

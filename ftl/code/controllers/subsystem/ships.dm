@@ -40,3 +40,8 @@ SUBSYSTEM_DEF(ships)
 		if(SSships.ShipSpawnLocations[i])
 			continue
 		return i
+		
+/datum/controller/subsystem/ships/proc/DelAllShips()
+	for(var/i in currentships)
+		var/datum/starship/ship = currentships[i]
+		qdel(ship)

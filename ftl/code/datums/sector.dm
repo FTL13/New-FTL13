@@ -19,6 +19,8 @@
 
   var/planet_prob = 75
   var/station_prob = 50
+  
+  var/ship_to_spawn
 
 
 /datum/sector/New()
@@ -34,7 +36,11 @@
 
   if(prob(station_prob))
     station = new /datum/station
-    
+  
+  if(prob(80))
+    //return
+    ship_to_spawn = /datum/starship/testship
+  
   parallax_icon = pickweight(list("empty" = 3, "fog" = 1, "rocks" = 1)) //temp to prove it works
 
 

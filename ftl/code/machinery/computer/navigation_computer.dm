@@ -45,6 +45,8 @@
 				dat += "Star charts indicate a planet will be in this region.<br>"
 			if(sector_details.station)
 				dat += "The Galactic Trading Association lists an operational station open for trading here.<br>"
+			if(sector_details.ship_to_spawn)
+				dat += " Sensors indicate a ship is within this sector.<br>"
 			//Name only for this sectors connections
 			dat += "<hr>Connected sectors:<br>"
 			for(var/sector_typeless in sector_details.connected_sectors)
