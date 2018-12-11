@@ -32,3 +32,6 @@ endmap
 map testship
 	default
 endmap
+
+map multiz_debug
+endmap
