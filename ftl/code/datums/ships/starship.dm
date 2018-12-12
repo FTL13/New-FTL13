@@ -64,7 +64,7 @@
 
 
 /datum/starship/proc/adjust_shield(value)
-	shield_integrity = min(max(0, shield_integrity + value), initial(shield_integrity))
+	shield_integrity = clamp(shield_integrity + value, 0 , initial(shield_integrity))
 	
 /datum/starship/Destroy()
 	. = ..()
