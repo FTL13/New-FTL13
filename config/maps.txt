@@ -29,8 +29,16 @@ map deltastation
 	minplayers 50
 endmap
 
+<<<<<<< HEAD
 map testship
 	default
+=======
+map donutstation
+	minplayers 50
+endmap
+
+map runtimestation
+>>>>>>> a5f5aee5a2... [READY]New Map: Donutstation V.5 (GOLD) (Platinum Hits) (#41099)
 endmap
 
 map multiz_debug
