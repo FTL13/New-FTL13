@@ -33,5 +33,9 @@ map testship
 	default
 endmap
 
-map multiz_debug
+#map donutstation
+	minplayers 50
+endmap
+
+#map multiz_debug
 endmap
