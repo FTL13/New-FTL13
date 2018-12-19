@@ -63,9 +63,9 @@
 			shiprooms[Atype] = x
 
 
-/datum/starship/proc/ShieldHit(var/datum/player_attack/attack_info)
-	shield_integrity -= max(0, shield_integrity - attack_info.shield_damage)
-
+/datum/starship/proc/adjust_shield(value)
+	shield_integrity = CLAMP(shield_integrity + value, 0 , initial(shield_integrity))
+	
 /datum/starship/Destroy()
 	. = ..()
 	SSships.ShipSpawnLocations[ship_spawn_slot] = TRUE //This slot is free for a new ship now.
@@ -86,8 +86,8 @@
 	return dodge_chance * dodge_modifier
 
 /datum/starship/testship
-	hull_integrity = 5000
-	shield_integrity = 0
+	hull_integrity = 5
+	shield_integrity = 2000
 
 
 
