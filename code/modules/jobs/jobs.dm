@@ -1,6 +1,6 @@
 GLOBAL_LIST_INIT(command_positions, list(
 	"Captain",
-	"Head of Personnel",
+	"Executive Officer", //FTL13: was Head of Personnel
 	"Head of Security",
 	"Chief Engineer",
 	"Research Director",
@@ -28,7 +28,7 @@ GLOBAL_LIST_INIT(science_positions, list(
 
 
 GLOBAL_LIST_INIT(supply_positions, list(
-	"Head of Personnel",
+	"Executive Officer", //FTL13: was Head of Personnel
 	"Quartermaster",
 	"Cargo Technician",
 	"Shaft Miner"))
@@ -99,7 +99,7 @@ GLOBAL_PROTECT(exp_specialmap)
 	var/static/regex/cap_expand = new("cap(?!tain)")
 	var/static/regex/cmo_expand = new("cmo")
 	var/static/regex/hos_expand = new("hos")
-	var/static/regex/hop_expand = new("hop")
+	var/static/regex/hop_expand = new("hop|xo") //FTL13: this shouldnt conflict with anything, probably safe
 	var/static/regex/rd_expand = new("rd")
 	var/static/regex/ce_expand = new("ce")
 	var/static/regex/qm_expand = new("qm")
@@ -115,7 +115,7 @@ GLOBAL_PROTECT(exp_specialmap)
 	job = cap_expand.Replace(job, "captain")
 	job = cmo_expand.Replace(job, "chief medical officer")
 	job = hos_expand.Replace(job, "head of security")
-	job = hop_expand.Replace(job, "head of personnel")
+	job = hop_expand.Replace(job, "executive officer") //FTL13: might conflict
 	job = rd_expand.Replace(job, "research director")
 	job = ce_expand.Replace(job, "chief engineer")
 	job = qm_expand.Replace(job, "quartermaster")

@@ -18,6 +18,7 @@
 #include "_maps\_FTL\_basemap.dm"
 #include "code\__DEFINES\~ftl_defines\ftl_navigation.dm"
 #include "code\__DEFINES\~ftl_defines\subsystem.dm"
+#include "ftl\code\xo.dm"
 #include "ftl\code\_onclick\hud\parallax_override.dm"
 #include "ftl\code\controllers\subsystem\ftl_navigation.dm"
 #include "ftl\code\datums\sector.dm"
