@@ -14,12 +14,11 @@
 		return
 
 /mob/camera/aiEye/remote/weapons/proc/JumpToShip()
-	var/target = input(eye_user, "Select ship to jump to!", "Ship Selection") as null|anything in SSships.GetUsedSpawnSlot()
+	var/target = input(eye_user, "Select ship to jump to!", "Ship Selection") as null|anything in SSships.currentships
 	if(!target)
 		return
 	var/obj/effect/landmark/ship_spawn/ship_spawn = target
 	setLoc(ship_spawn.loc) 
-
 
 /obj/machinery/computer/camera_advanced/weapons
 	name = "Weapons Console"
