@@ -14,9 +14,10 @@
 		return
 
 /mob/camera/aiEye/remote/weapons/proc/JumpToShip()
-	var/obj/effect/landmark/ship_spawn/ship_spawn = SSships.GetUsedSpawnSlot()
-	if(!ship_spawn)
+	target = input(user, "Select ship to jump to!", "Ship Selection") as null|anything in SSships.GetUsedSpawnSlot()
+	if(!target)
 		return
+	var/obj/effect/landmark/ship_spawn/ship_spawn = target
 	setLoc(ship_spawn.loc) 
 
 

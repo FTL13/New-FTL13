@@ -17,9 +17,12 @@
 	A.xo = 20
 	A.starting = weapon
 	A.fire(dir2angle(weapon.dir))
+	A.firer = weapon
 	message_admins("pew")
 
 	playsound(weapon, attack_info.fire_sound, 50, 1)
+
+	return A
 
 /obj/item/weapon_chip/projectile/hit_ship(var/turf/open/indestructible/ftlfloor/T) //Real attack
 	
@@ -42,9 +45,13 @@
 
 	if(!S)
 		message_admins("PANIC NO SHIP AAA")	
+		return
 
 	message_admins("fire real projectile")
 	for(var/i in 1 to shots_fired)
+		if(!S)
+			message_admins("ship has died rip")
+			return
 		if(prob(S.get_dodge_chance()))
 			message_admins("shot missed")
 			continue
@@ -53,7 +60,7 @@
 			message_admins("shield")
 			continue
 		addtimer(CALLBACK(src, .proc/SpawnShipProjectile, T, M, pix_x, pix_y), fire_delay*i)
-		addtimer(CALLBACK(T, /turf/open/indestructible/ftlfloor/.proc/HitByShipProjectile, loc, attack_info), fire_delay*i)
+		addtimer(CALLBACK(T, /turf/open/indestructible/ftlfloor/.proc/HitByShipProjectile, attack_info), fire_delay*i)
 		addtimer(CALLBACK(S, /datum/starship/.proc/adjust_hull, -attack_info.hull_damage), fire_delay*i)
 
 /obj/item/weapon_chip/projectile/proc/SpawnShipProjectile(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info, var/matrix/M, var/pix_x, var/pix_y) //projectile that actually hits the ship

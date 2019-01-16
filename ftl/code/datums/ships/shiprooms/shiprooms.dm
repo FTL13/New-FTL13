@@ -1,3 +1,6 @@
+/datum/shiproom/empty
+	name = "empty room"
+
 /datum/shiproom/bridge
 	name = "bridge room"
 

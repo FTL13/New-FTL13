@@ -10,19 +10,20 @@ SUBSYSTEM_DEF(ships)
 
 /datum/controller/subsystem/ships/Initialize(timeofday)
 	. = ..()
-	var/list/errorList = list()
-	var/list/combatmaps = SSmapping.LoadGroup(errorList, "Space Combat", "map_files/generic", "SpaceCombat.dmm", default_traits = list(ZTRAIT_SPACECOMBAT = TRUE), silent = TRUE)
-	
-	if(errorList.len)	// our map failed to load
-		message_admins("Designated space combat zlevel failed to load!")
-		log_game("Designated space combat zlevel failed to load!")
-		return FALSE
-		
-	for(var/datum/parsed_map/PM in combatmaps)
-		PM.initTemplateBounds()
+	var/datum/space_level/level = SSmapping.add_new_zlevel("Space Combat", list(ZTRAIT_SPACECOMBAT = TRUE))
+	var/datum/parsed_map/parsed = load_map(file("_maps/map_files/generic/SpaceCombat.dmm"), 1, 1, level.z_value, no_changeturf=(SSatoms.initialized == INITIALIZATION_INSSATOMS), placeOnTop=TRUE)
+	parsed.initTemplateBounds()
+
+	var/SSx = 12
+	var/SSy = 8
+	var/SSz = 4
+	var/SSy_step = 24
+	for(var/i in 0 to 4)
+		new /obj/effect/landmark/ship_spawn(locate(SSx,SSy+SSy_step*i,SSz))
+
 	CreateShip(/datum/starship/testship) //debug
 
-/datum/controller/subsystem/ships/proc/CreateShip(var/datum/shiptype)
+/datum/controller/subsystem/ships/proc/CreateShip(var/datum/shiptype = /datum/starship/testship)
 	var/obj/effect/landmark/ship_spawn/ship_spawn = GetFreeSpawnSlot()
 	if(!ship_spawn)		
 		message_admins("No more spawn slots for ships, ship not spawned!")

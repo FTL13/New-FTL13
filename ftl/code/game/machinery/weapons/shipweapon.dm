@@ -9,6 +9,15 @@
 	anchored = TRUE
 	density = TRUE
 
+	var/datum/effect_system/spark_spread/sparks
+
+/obj/machinery/shipweapon/Initialize()
+	. = ..()
+	sparks = new
+	sparks.attach(src)
+	sparks.set_up(5, TRUE, src)
+
+
 /obj/machinery/shipweapon/Destroy(force)
 	if(force) //Is an admin actually trying to delete it?
 		..()
@@ -47,9 +56,7 @@
 
 /obj/machinery/shipweapon/proc/weapon_visuals(T) //Visuals of the weapon itself.
 	if(prob(35)) //Random chance to spark
-		var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
-		s.set_up(5, 1, src)
-		s.start()
+		sparks.start()
 	return
 
 /obj/machinery/shipweapon/proc/hit_ship(T) //The actual attack on the NPC ship
