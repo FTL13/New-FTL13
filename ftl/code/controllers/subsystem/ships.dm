@@ -1,10 +1,13 @@
 SUBSYSTEM_DEF(ships)
 	name = "Ships"
 	wait = 10
-	init_order = -3
-	flags = SS_NO_FIRE
+	init_order = INIT_ORDER_FTL_SHIPS
+	flags = SS_BACKGROUND
 
-	var/list/currentships = list()
+	var/list/currentrun = list()
+
+	var/list/ships = list()
+
 	var/list/ShipSpawnLocations = list() //Assoc list of key value Ship_spawn landmark and boolean value. TRUE means it is free
 
 
@@ -22,6 +25,32 @@ SUBSYSTEM_DEF(ships)
 		new /obj/effect/landmark/ship_spawn(locate(SSx,SSy+SSy_step*i,SSz))
 
 	CreateShip(/datum/starship/testship) //debug
+
+/datum/controller/subsystem/ships/fire(resumed = 0)
+	if(!resumed)
+		src.currentrun = ships.Copy()
+
+	var/list/currentrun = src.currentrun
+
+	while(currentrun.len)
+		var/datum/starship/ship = currentrun[currentrun.len]
+		currentrun.len--
+		if(!ship || QDELETED(ship))
+			ships -= ship
+			if(MC_TICK_CHECK)
+				return
+			continue
+
+		//repair_tick(ship)
+
+		//if( ship.attacking_player || ship.target )
+			//attack_tick(ship)
+
+		//ship_ai(ship)
+
+		if(MC_TICK_CHECK)
+			return
+
 
 /datum/controller/subsystem/ships/proc/CreateShip(var/datum/shiptype = /datum/starship/testship)
 	var/obj/effect/landmark/ship_spawn/ship_spawn = GetFreeSpawnSlot()
@@ -43,6 +72,6 @@ SUBSYSTEM_DEF(ships)
 		return i
 		
 /datum/controller/subsystem/ships/proc/DelAllShips()
-	for(var/i in currentships)
-		var/datum/starship/ship = currentships[i]
+	for(var/i in ships)
+		var/datum/starship/ship = ships[i]
 		qdel(ship)

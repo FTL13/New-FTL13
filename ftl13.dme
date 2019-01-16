@@ -18,6 +18,7 @@
 #include "_maps\_FTL\_basemap.dm"
 #include "code\__DEFINES\~ftl_defines\ftl.dm"
 #include "code\__DEFINES\~ftl_defines\ftl_navigation.dm"
+#include "code\__DEFINES\~ftl_defines\ftl_ships.dm"
 #include "code\__DEFINES\~ftl_defines\maps.dm"
 #include "code\__DEFINES\~ftl_defines\subsystem.dm"
 #include "ftl\code\_onclick\hud\parallax_override.dm"

@@ -14,10 +14,10 @@
 		return
 
 /mob/camera/aiEye/remote/weapons/proc/JumpToShip()
-	var/target = input(eye_user, "Select ship to jump to!", "Ship Selection") as null|anything in SSships.currentships
+	var/target = input(eye_user, "Select ship to jump to!", "Ship Selection") as null|anything in SSships.ships
 	if(!target)
 		return
-	var/obj/effect/landmark/ship_spawn/ship_spawn = SSships.currentships[target]
+	var/obj/effect/landmark/ship_spawn/ship_spawn = SSships.ships[target]
 	setLoc(ship_spawn.loc) 
 
 /obj/machinery/computer/camera_advanced/weapons

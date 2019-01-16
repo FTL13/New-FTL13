@@ -1,2 +1,4 @@
 
 #define INIT_ORDER_FTL_NAV			-60
+#define INIT_ORDER_FTL_SHIPS			-59
+#define INIT_ORDER_FTL_PLAYER_SHIP		-58

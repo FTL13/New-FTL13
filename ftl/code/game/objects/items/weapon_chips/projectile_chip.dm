@@ -52,7 +52,7 @@
 		if(!S)
 			message_admins("ship has died rip")
 			return
-		if(prob(S.get_dodge_chance()))
+		if(prob(S.get_dodge_chance() * attack_info.evasion_mod))
 			message_admins("shot missed")
 			continue
 		if(S.shield_integrity) //shot blocked by shields TODO: Make this visibly hit the shields and add actual visual shields.

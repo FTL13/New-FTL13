@@ -17,7 +17,7 @@ SUBSYSTEM_DEF(ftl_navigation)
 
 	var/list/ship_areas = list()
 
-	var/list/sector_name_fragments = list("le", "xe", "ge", "za", "ce", "bi", "so", "us", "es", "ar", "ma", "in", "di", "re", "a", "er", "at", "en", "be", "ra", "la", "ve", "ti", "ed", "or", "gu", "an", "te", "is", "ri", "on")
+	var/list/sector_name_fragments = list("le", "xe", "ge", "za", "ce", "bi", "so", "us", "es", "ar", "ma", "in", "di", "re", "a", "er", "at", "en", "be", "ra", "la", "ve", "ti", "ed", "or", "gu", "an", "te", "is", "ri", "on") //Move this to a JSON at some point, TMTime
 
 	var/list/sector_types = list()
 	var/list/planet_types = list()
@@ -35,6 +35,7 @@ SUBSYSTEM_DEF(ftl_navigation)
 
 
 /datum/controller/subsystem/ftl_navigation/Initialize(timeofday)
+	.=..()
 	for(var/type in subtypesof(/datum/planet)) //Get all planet types and weights
 		var/datum/planet/P = type
 		planet_types[type] = initial(P.frequency)
@@ -80,6 +81,8 @@ SUBSYSTEM_DEF(ftl_navigation)
 /datum/controller/subsystem/ftl_navigation/proc/ftl_init_spoolup(sectorid)
 	if(ftl_state != FTL_IDLE)
 		return
+	if(!can_jump())
+		ftl_message("Something in this system is preventing us from spooling up our FTL!") //Add more info on a case per case basis here later
 	ftl_state = FTL_SPOOLUP //Setting early to prevent multiple spoolups
 	var/datum/sector/S = all_sectors[sectorid]
 	if(!S)
@@ -87,8 +90,15 @@ SUBSYSTEM_DEF(ftl_navigation)
 	to_sector = S
 	spool_up() //Begin FTL
 	addtimer(CALLBACK(src, .proc/qdel_unvisited_systems, current_sector, to_sector), 20)
+	SSships.DelAllShips()
 	return TRUE
 
+/datum/controller/subsystem/ftl_navigation/proc/can_jump(sectorid)
+	for(var/i in SSships.ships)
+		var/datum/starship/S = i
+		if(S.traits & FTL_CANCELLING)
+			return FALSE //A ship in the system is preventing us from jumping!
+	return TRUE
 
 /datum/controller/subsystem/ftl_navigation/proc/qdel_unvisited_systems(var/datum/sector/old_sector, var/datum/sector/new_sector)
 	for(var/sector_loop in old_sector.connected_sectors) //Cleans up unvisited sectors.
