@@ -31,6 +31,7 @@
 #include "ftl\code\datums\ships\shiprooms\shiprooms.dm"
 #include "ftl\code\game\area\areas.dm"
 #include "ftl\code\game\area\shiprooms.dm"
+#include "ftl\code\game\gamemodes\base_ftl.dm"
 #include "ftl\code\game\machinery\computer\weapons_console.dm"
 #include "ftl\code\game\machinery\weapons\energyweapons.dm"
 #include "ftl\code\game\machinery\weapons\shipweapon.dm"
