@@ -17,7 +17,7 @@ obj/item/projectile/ship_projectile //Is purely visual, unless you stand infront
 
 ////BELOW IS PURELY TO LOOK FANCY
 
-/obj/effect/playership_projectile //even more visual
+/obj/effect/ship_projectile //even more visual
 	name = "Phase Cannon shot"
 	desc = "HOLY FUCK GET TO COVER"
 	icon = 'icons/obj/projectiles.dmi'

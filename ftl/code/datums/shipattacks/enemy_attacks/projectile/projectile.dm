@@ -39,3 +39,4 @@
 /datum/shipweapon/projectile/proc/SpawnShipProjectile(var/turf/T, var/matrix/M, var/pix_x, var/pix_y) //projectile that actually hits the ship
 	var/obj/effect/ship_projectile/enemy/A = new(T, M, pix_x, pix_y, fly_in_time)
 	A.icon_state = projectile_icon
+	playsound(T, fire_sound, 75, 1)

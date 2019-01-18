@@ -60,7 +60,7 @@
 			S.adjust_shield(-attack_info.shield_damage)
 			message_admins("shield")
 			continue
-		addtimer(CALLBACK(src, .proc/SpawnShipProjectile, T, M, pix_x, pix_y), fire_delay*i)
+		addtimer(CALLBACK(src, .proc/SpawnShipProjectile,T, M, pix_x, pix_y), fire_delay*i)
 		addtimer(CALLBACK(T, /turf/open/indestructible/ftlfloor/.proc/HitByShipProjectile, attack_info), fire_delay*i)
 		addtimer(CALLBACK(S, /datum/starship/.proc/adjust_hull, -attack_info.hull_damage), fire_delay*i)
 
