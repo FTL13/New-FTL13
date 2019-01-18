@@ -2,6 +2,7 @@
 	var/fire_delay = 5 //Time between shots
 	var/shots_fired = 1
 	var/projectile_icon = "laser"
+	var/fly_in_time = 20 //Time it takes for projectile to hit its target
 
 /obj/item/weapon_chip/projectile/weapon_visuals(var/turf/open/indestructible/ftlfloor/T)
 	.=..()
@@ -63,8 +64,8 @@
 		addtimer(CALLBACK(T, /turf/open/indestructible/ftlfloor/.proc/HitByShipProjectile, attack_info), fire_delay*i)
 		addtimer(CALLBACK(S, /datum/starship/.proc/adjust_hull, -attack_info.hull_damage), fire_delay*i)
 
-/obj/item/weapon_chip/projectile/proc/SpawnShipProjectile(var/turf/open/indestructible/ftlfloor/T, var/datum/player_attack/attack_info, var/matrix/M, var/pix_x, var/pix_y) //projectile that actually hits the ship
-	var/obj/effect/ship_projectile/A = new(T, attack_info, M, pix_x, pix_y)
+/obj/item/weapon_chip/projectile/proc/SpawnShipProjectile(var/turf/T, var/matrix/M, var/pix_x, var/pix_y) //projectile that actually hits the ship
+	var/obj/effect/ship_projectile/player/A = new(T, M, pix_x, pix_y, fly_in_time)
 	A.icon_state = projectile_icon
 
 /obj/item/weapon_chip/projectile/phase

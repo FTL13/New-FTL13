@@ -17,21 +17,19 @@ SUBSYSTEM_DEF(player_ship)
 	hull_integrity = max_hull_integrity
 	shield_integrity = max_shield_integrity
 
-
 /datum/controller/subsystem/player_ship/proc/hit(var/datum/shipweapon/W)
 	if(prob(get_dodge_chance() * W.evasion_mod))
 		message_admins("shot missed")
 		return
-	if(S.shield_integrity) //shot blocked by shields TODO: Make this visibly hit the shields and add actual visual shields.
-		S.adjust_shield(-W.shield_damage)
+	if(shield_integrity) //shot blocked by shields TODO: Make this visibly hit the shields and add actual visual shields.
+		adjust_shield(-W.shield_damage)
 		message_admins("player shield hit")
 		return
 	adjust_hull(-W.hull_damage)
 	
-
 /datum/controller/subsystem/player_ship/proc/adjust_hull(var/change)
 	hull_integrity = min(hull_integrity + change, max_hull_integrity)
-	if(hull <= 0)
+	if(hull_integrity <= 0)
 		ship_destruction()
 
 /datum/controller/subsystem/player_ship/proc/adjust_shield(var/change)

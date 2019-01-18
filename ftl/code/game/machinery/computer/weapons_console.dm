@@ -17,8 +17,8 @@
 	var/target = input(eye_user, "Select ship to jump to!", "Ship Selection") as null|anything in SSships.ships
 	if(!target)
 		return
-	var/obj/effect/landmark/ship_spawn/ship_spawn = SSships.ships[target]
-	setLoc(ship_spawn.loc) 
+	var/datum/starship/S = SSships.ships[target]
+	setLoc(S.center_turf) 
 
 /obj/machinery/computer/camera_advanced/weapons
 	name = "Weapons Console"

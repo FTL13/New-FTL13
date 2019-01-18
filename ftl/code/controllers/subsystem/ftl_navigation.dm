@@ -148,6 +148,7 @@ SUBSYSTEM_DEF(ftl_navigation)
 	to_sector = null
 	if(current_sector.ship_to_spawn)
 		SSships.CreateShip(current_sector.ship_to_spawn)
+	SSships.ShipsEngage()
 	for(var/sector_type in current_sector.connected_sectors)
 		var/datum/sector/sector_to_gen = sector_type
 		generate_connecting_sectors(sector_to_gen)
