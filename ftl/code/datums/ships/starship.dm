@@ -161,7 +161,7 @@
 /datum/starship/testship
 	hull_integrity = 50
 	max_shield_integrity = 20
-	init_weapons = list(/datum/shipweapon/projectile, /datum/shipweapon/projectile)
+	init_weapons = list(/datum/shipweapon/projectile/laser)
 
 
 

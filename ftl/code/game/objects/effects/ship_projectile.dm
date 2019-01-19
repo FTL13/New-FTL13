@@ -50,7 +50,6 @@ obj/item/projectile/ship_projectile //Is purely visual, unless you stand infront
 	duration = 5
 
 /obj/effect/temp_visual/ship_target/Initialize(var/turf/T, var/duration)
-	playsound(T, 'ftl/sound/effects/hit_warning.ogg', 50,0)
 	set_light(5, 15, "#ff0000")
 	addtimer(CALLBACK(src, .proc/SelfDestruct), duration)
 

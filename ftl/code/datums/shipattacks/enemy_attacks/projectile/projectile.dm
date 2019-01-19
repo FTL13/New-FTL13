@@ -31,7 +31,9 @@
 		var/fucked_time = shot_travel_time + shot_delay*i //This is when we're going to get fucked
 
 		new /obj/effect/temp_visual/ship_target(T, fucked_time + fly_in_time) //A warning beacon that'll stay at this location until the target is hit
+		playsound(T, 'ftl/sound/effects/hit_warning.ogg', 50)
 		addtimer(CALLBACK(src, .proc/SpawnShipProjectile, T, M, pix_x, pix_y, fly_in_time), fucked_time)
+		addtimer(CALLBACK(src, .proc/damage_effects, T, M, pix_x, pix_y, fly_in_time), fucked_time + fly_in_time)
 
 /datum/shipweapon/projectile/damage_effects(var/turf/T)
 	. = ..()
@@ -39,4 +41,12 @@
 /datum/shipweapon/projectile/proc/SpawnShipProjectile(var/turf/T, var/matrix/M, var/pix_x, var/pix_y) //projectile that actually hits the ship
 	var/obj/effect/ship_projectile/enemy/A = new(T, M, pix_x, pix_y, fly_in_time)
 	A.icon_state = projectile_icon
-	playsound(T, fire_sound, 75, 1)
+	playsound(T, fire_sound,75,1)
+
+/datum/shipweapon/projectile/laser
+	shots_fired = 3
+	fire_delay = 100
+
+/datum/shipweapon/projectile/laser/damage_effects(var/turf/T)
+	ftl_explosion(T,0,1,2)
+
