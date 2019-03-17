@@ -116,14 +116,7 @@ Unimaginable Nut
 Valid Vincent
 Weather Report
 Widderwise
-<<<<<<< HEAD
-Shinturner
-Early Worm
-Fretworks
-Grebble
-=======
 Yanye Kest
 Yesterdays Beef
 Yobbo
 Ziggy Yoyo
->>>>>>> de9e157fd7... Sort clown names file alphabetically (#43131)
